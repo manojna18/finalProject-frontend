@@ -13,24 +13,11 @@ const Home = () => {
     calories: 5,
   };
   const [results, setResults] = useState<Ingredient>(dummyIngr);
-  const [recipes, setRecipes] = useState<Recipe []>([]);
+  const [recipes, setRecipes] = useState<Recipe[]>([]);
 
-  console.log(results)
-  useEffect(() => {
-    getIngredient("spinach").then((res) => {
-      setResults(res);
-      // console.log(res);
-    });
-    getRecipe("chicken").then((res) => {
-      console.log(res);
-      setRecipes(res.hits.map((r)=>r.recipe));
-    })
-  }, []);
+  console.log(results);
 
-  return <div className="Home">
-      {results.calories}
-      <p>{recipes[0]?.label}</p>
-    </div>;
+  return <div className="Home"></div>;
 };
 
 export default Home;

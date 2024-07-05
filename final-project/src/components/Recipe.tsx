@@ -1,7 +1,10 @@
 import { FormEvent, useEffect, useState } from "react";
 import "./css/Recipe.css";
-import { getRecipe } from "../services/edamamApiService";
+import { getByID, getRecipe } from "../services/edamamApiService";
 import RecipeInterface from "../models/Recipe";
+import { ApiResponse } from "../models/ApiResponse";
+import RecipeDetail from "./RecipeDetail";
+import RecipeCard from "./RecipeCard";
 
 const Recipe = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -12,7 +15,7 @@ const Recipe = () => {
     e.preventDefault();
     getRecipe(searchTerm, veganOnly).then((res) => {
       setRecipeList(res.results);
-      console.log(res.results);
+      console.log(res);
     });
     setSearchTerm("");
   };
@@ -40,15 +43,7 @@ const Recipe = () => {
       </form>
       <div className="recipes-container">
         {recipeList.map((recipe) => (
-          <div className="recipe" key={recipe.id}>
-            <h3>{recipe.title}</h3>
-            {/* {recipe.ingredientLines.map((ing) => ( */}
-            {/* <p>{ing}</p> */}
-            {/* ))} */}
-            {/* <p>Meal Type: {recipe.mealType}</p> */}
-            <img src={recipe.image} />
-            <button>Read more</button>
-          </div>
+          <RecipeCard recipe={recipe} />
         ))}
       </div>
     </div>
