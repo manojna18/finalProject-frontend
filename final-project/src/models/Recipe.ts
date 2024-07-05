@@ -1,0 +1,30 @@
+export default interface Recipe {
+    uri: string;
+    label:	string;
+    image:	string;
+    images:	{};
+    source:	string;
+    url:	string;
+    shareAs:	string;
+    yield:	number;
+    dietLabels:	string[];
+    healthLabels:	string[];
+    cautions:	string[];
+    ingredientLines:	string[];
+    ingredients:	[];
+    calories:	number;
+    glycemicIndex:	number;
+    inflammatoryIndex:	number;
+    totalCO2Emissions:	number;
+    co2EmissionsClass:	string;
+    totalWeight:	number;
+    cuisineType:	string [];
+    mealType:	string [];
+    dishType:	string [];
+    instructions:	[];
+    tags:	[];
+    externalId:	string;
+    totalNutrients:	{};
+    totalDaily:	{};
+    digest:	{};
+}
