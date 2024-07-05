@@ -5,13 +5,14 @@ import RecipeInterface from "../models/Recipe";
 
 const Recipe = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [veganOnly, setVeganOnly] = useState(true);
+  const [veganOnly, setVeganOnly] = useState(false);
   const [recipeList, setRecipeList] = useState<RecipeInterface[]>([]);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    getRecipe(searchTerm).then((res) => {
-      setRecipeList(res.hits.map((item) => item.recipe));
+    getRecipe(searchTerm, veganOnly).then((res) => {
+      setRecipeList(res.results);
+      console.log(res.results);
     });
     setSearchTerm("");
   };
@@ -29,7 +30,7 @@ const Recipe = () => {
             setSearchTerm(e.target.value);
           }}
         />
-        <label htmlFor="veg">Also show vegetarian recipes</label>
+        <label htmlFor="veg">Only show vegan recipes</label>
         <input
           type="checkbox"
           id="veg"
@@ -39,15 +40,15 @@ const Recipe = () => {
       </form>
       <div className="recipes-container">
         {recipeList.map((recipe) => (
-          <>
-            <h3>{recipe.label}</h3>
-            {recipe.ingredientLines.map((ing) => (
-              <p>{ing}</p>
-            ))}
-            <p>Meal Type: {recipe.mealType}</p>
+          <div className="recipe" key={recipe.id}>
+            <h3>{recipe.title}</h3>
+            {/* {recipe.ingredientLines.map((ing) => ( */}
+            {/* <p>{ing}</p> */}
+            {/* ))} */}
+            {/* <p>Meal Type: {recipe.mealType}</p> */}
             <img src={recipe.image} />
-            <a href={recipe.url}>Read more</a>
-          </>
+            <button>Read more</button>
+          </div>
         ))}
       </div>
     </div>
