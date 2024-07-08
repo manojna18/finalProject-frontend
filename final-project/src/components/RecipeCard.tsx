@@ -10,17 +10,14 @@ interface Prop {
 }
 
 const RecipeCard = ({ recipe }: Prop) => {
-  const addToPlate = () => {
-    setCurrentCalories();
-  };
   const [detailBool, setDetailBool] = useState(false);
 
   const showItemDetails = (recipe: RecipeInterface) => {
     console.dir(recipe);
     setDetailBool(!detailBool);
-    getByID(recipe.id).then((res) => {
-      console.log(res);
-    });
+    // getByID(recipe.id).then((res) => {
+    //   console.log(res);
+    // });
   };
 
   return (
@@ -50,6 +47,3 @@ const RecipeCard = ({ recipe }: Prop) => {
 };
 
 export default RecipeCard;
-function setCurrentCalories() {
-  throw new Error("Function not implemented.");
-}

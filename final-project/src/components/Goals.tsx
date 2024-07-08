@@ -7,7 +7,7 @@ const Goals = () => {
   const [userWeight, setUserWeight] = useState<string>("");
   const [userAge, setUserAge] = useState<string>("");
   const [calorieGoal, setCalorieGoal] = useState<number>(2000);
-  const { user, addCalories } = useContext(UserContext);
+  const { user, addMacros } = useContext(UserContext);
 
   return (
     <div className="Goals">

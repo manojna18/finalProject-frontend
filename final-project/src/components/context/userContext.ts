@@ -1,12 +1,17 @@
 import { createContext } from "react";
-import User from "../models/User";
+import User from "../../models/User";
 interface UserContextModel {
   user: User | null;
-  addCalories(calories: number): void;
+  addMacros(
+    calories: number,
+    protein: number,
+    carbs: number,
+    fats: number
+  ): void;
 }
 const defaultValues: UserContextModel = {
   user: null,
-  addCalories: () => {},
+  addMacros: () => {},
 };
 const UserContext = createContext(defaultValues);
 export default UserContext;

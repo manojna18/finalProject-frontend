@@ -12,9 +12,10 @@ interface Props {
 const RecipeDetail = ({ id }: Props) => {
   const [details, setDetails] = useState<RecipeByID>();
   const [nutriInfo, setNutriInfo] = useState<NutrientInfo>();
-  const { user, addCalories } = useContext(UserContext);
+  const { user, addMacros } = useContext(UserContext);
 
   useEffect(() => {
+    console.log("hi");
     getByID(id).then((res) => {
       console.log(res);
       setDetails(res);
@@ -81,12 +82,19 @@ const RecipeDetail = ({ id }: Props) => {
             nutriInfo?.nutrients.find((item) => item.name === "Fiber")?.amount
           }${nutriInfo?.nutrients.find((item) => item.name === "Fiber")?.unit}`}
         </p>
+        {/* ADD TO PLATE BUTTON */}
         <button
           className="addToPlateBtn"
           onClick={() => {
-            addCalories(
+            addMacros(
               nutriInfo!.nutrients.find((item) => item.name === "Calories")!
-                .amount
+                .amount,
+              nutriInfo!.nutrients.find((item) => item.name === "Protein")!
+                .amount,
+              nutriInfo!.nutrients.find(
+                (item) => item.name === "Carbohydrates"
+              )!.amount,
+              nutriInfo!.nutrients.find((item) => item.name === "Fat")!.amount
             );
           }}
         >
