@@ -2,7 +2,7 @@ import { useState } from "react";
 import Recipe from "../models/Recipe";
 import "./css/RecipeCard.css";
 import RecipeDetail from "./RecipeDetail";
-import { getByID } from "../services/edamamApiService";
+import { getByID } from "../services/spoonacularApiService";
 import RecipeInterface from "../models/Recipe";
 
 interface Prop {
@@ -37,9 +37,9 @@ const RecipeCard = ({ recipe }: Prop) => {
           Favorite
           {/* <input type="checkbox" onChange={}/> */}
         </label>
-        <p className={detailBool ? "itemDetails" : "itemDetails hidden"}>
-          <RecipeDetail />
-        </p>
+        <div className={detailBool ? "itemDetails" : "itemDetails hidden"}>
+          <RecipeDetail id={recipe.id} />
+        </div>
       </div>
     </div>
   );

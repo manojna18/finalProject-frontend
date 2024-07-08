@@ -1,9 +1,7 @@
 import { FormEvent, useEffect, useState } from "react";
 import "./css/Recipe.css";
-import { getByID, getRecipe } from "../services/edamamApiService";
+import { getByID, getRecipe } from "../services/spoonacularApiService";
 import RecipeInterface from "../models/Recipe";
-import { ApiResponse } from "../models/ApiResponse";
-import RecipeDetail from "./RecipeDetail";
 import RecipeCard from "./RecipeCard";
 
 const Recipe = () => {
@@ -43,7 +41,7 @@ const Recipe = () => {
       </form>
       <div className="recipes-container">
         {recipeList.map((recipe) => (
-          <RecipeCard recipe={recipe} />
+          <RecipeCard key={recipe.id} recipe={recipe} />
         ))}
       </div>
     </div>
