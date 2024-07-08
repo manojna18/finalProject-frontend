@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./css/RecipeDetail.css";
 import { RecipeByID } from "../models/RecipeByID";
 import { getByID, getNutritionInfo } from "../services/spoonacularApiService";
 import NutrientInfo from "../models/NutrientInfo";
+import UserContext from "../context/UserContext";
 
 interface Props {
   id: number;
@@ -11,6 +12,7 @@ interface Props {
 const RecipeDetail = ({ id }: Props) => {
   const [details, setDetails] = useState<RecipeByID>();
   const [nutriInfo, setNutriInfo] = useState<NutrientInfo>();
+  const { user, addCalories } = useContext(UserContext);
 
   useEffect(() => {
     getByID(id).then((res) => {
@@ -79,6 +81,17 @@ const RecipeDetail = ({ id }: Props) => {
             nutriInfo?.nutrients.find((item) => item.name === "Fiber")?.amount
           }${nutriInfo?.nutrients.find((item) => item.name === "Fiber")?.unit}`}
         </p>
+        <button
+          className="addToPlateBtn"
+          onClick={() => {
+            addCalories(
+              nutriInfo!.nutrients.find((item) => item.name === "Calories")!
+                .amount
+            );
+          }}
+        >
+          Add To Plate
+        </button>
       </div>
     </>
   );

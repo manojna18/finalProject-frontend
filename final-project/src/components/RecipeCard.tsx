@@ -10,6 +10,9 @@ interface Prop {
 }
 
 const RecipeCard = ({ recipe }: Prop) => {
+  const addToPlate = () => {
+    setCurrentCalories();
+  };
   const [detailBool, setDetailBool] = useState(false);
 
   const showItemDetails = (recipe: RecipeInterface) => {
@@ -33,6 +36,7 @@ const RecipeCard = ({ recipe }: Prop) => {
         >
           Read more
         </button>
+
         <label htmlFor="">
           Favorite
           {/* <input type="checkbox" onChange={}/> */}
@@ -46,3 +50,6 @@ const RecipeCard = ({ recipe }: Prop) => {
 };
 
 export default RecipeCard;
+function setCurrentCalories() {
+  throw new Error("Function not implemented.");
+}
