@@ -15,16 +15,19 @@ const RecipeDetail = ({ id }: Props) => {
   const { user, addMacros } = useContext(UserContext);
 
   useEffect(() => {
+    let ignore = false;
     console.log("hi");
-    getByID(id).then((res) => {
-      console.log(res);
-      setDetails(res);
-    });
+    if (!ignore) {
+      getByID(id).then((res) => {
+        console.log(res);
+        setDetails(res);
+      });
 
-    getNutritionInfo(id).then((res) => {
-      console.log(res);
-      setNutriInfo(res);
-    });
+      getNutritionInfo(id).then((res) => {
+        console.log(res);
+        setNutriInfo(res);
+      });
+    }
   }, []);
 
   return (
