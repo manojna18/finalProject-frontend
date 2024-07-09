@@ -1,10 +1,15 @@
 import { useContext } from "react";
 import "./css/NutritionTracker.css";
-import UserContext from "../context/UserContext";
+import AccountContext from "../context/AccountContext";
 import RecipeCard from "./RecipeCard";
+import { Chart, ArcElement } from "chart.js/auto";
+import { CategoryScale } from "chart.js/auto";
+import PieChart from "./PieChart";
+
+Chart.register(ArcElement);
 
 const NutritionTracker = () => {
-  const { user } = useContext(UserContext);
+  const { user } = useContext(AccountContext);
   const calorieGoal = user!.calorieGoal;
 
   //The calorie values per gram
@@ -31,10 +36,28 @@ const NutritionTracker = () => {
     fatCaloriePerGram
   ).toFixed(2);
 
+  const carbsConsumedInCal = user?.totalDailyCarbs! * carbCaloriePerGram;
+  const proteinConsumedInCal = user?.totalDailyProtein! * proteinCaloriePerGram;
+  const fatConsumedInCal = user?.totalDailyFats! * fatCaloriePerGram;
+
+  const data = {
+    labels: ["Protein", "Carbs", "Fats"],
+    datasets: [
+      {
+        label: "Calories",
+        data: [proteinConsumedInCal, carbsConsumedInCal, fatConsumedInCal],
+        backgroundColor: ["#FF0000", "#0000FF", "#00FF00"],
+      },
+    ],
+    borderWidth: 0.5,
+  };
   console.log(user?.meals);
 
   return (
     <div className="NutritionTracker">
+      <>
+        <PieChart chartData={data} />
+      </>
       <div>
         <p>Goals</p>
         <p>Calorie Goal: {user?.calorieGoal}</p>
@@ -42,7 +65,6 @@ const NutritionTracker = () => {
         <p>Carbs: {carbLimitInGrams}</p>
         <p>Fats: {fatLimitInGrams}</p>
       </div>
-
       <p>Calories: {user?.totalDailyCalories?.toFixed(2)}</p>
       <p>Protein: {user?.totalDailyProtein?.toFixed(2)}</p>
       <p>Carbs: {user?.totalDailyCarbs?.toFixed(2)}</p>

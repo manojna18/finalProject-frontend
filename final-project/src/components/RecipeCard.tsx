@@ -4,7 +4,7 @@ import "./css/RecipeCard.css";
 import RecipeDetail from "./RecipeDetail";
 import { getByID } from "../services/spoonacularApiService";
 import RecipeInterface from "../models/Recipe";
-import UserContext from "../context/UserContext";
+import UserContext from "../context/AccountContext";
 
 interface Prop {
   recipe: Recipe;

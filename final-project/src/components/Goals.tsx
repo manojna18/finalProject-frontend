@@ -1,5 +1,5 @@
 import "./css/Goals.css";
-import UserContext from "../context/UserContext";
+import UserContext from "../context/AccountContext";
 import { FormEvent, useContext, useEffect, useState } from "react";
 
 const Goals = () => {

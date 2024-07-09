@@ -3,7 +3,7 @@ import "./css/RecipeDetail.css";
 import { RecipeByID } from "../models/RecipeByID";
 import { getByID, getNutritionInfo } from "../services/spoonacularApiService";
 import NutrientInfo from "../models/NutrientInfo";
-import UserContext from "../context/UserContext";
+import UserContext from "../context/AccountContext";
 import Recipe from "../models/Recipe";
 
 interface Props {

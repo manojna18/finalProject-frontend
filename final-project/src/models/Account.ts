@@ -1,8 +1,9 @@
 import BodyType from "./BodyType";
 import Recipe from "./Recipe";
 
-export default interface User {
+export default interface Account {
   _id?: string;
+  userId?: string;
   bodyType: BodyType;
   totalDailyCalories: number;
   totalDailyProtein: number;

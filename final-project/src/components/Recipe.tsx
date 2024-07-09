@@ -3,7 +3,7 @@ import "./css/Recipe.css";
 import { getByID, getRecipe } from "../services/spoonacularApiService";
 import RecipeInterface from "../models/Recipe";
 import RecipeCard from "./RecipeCard";
-import UserContext from "../context/UserContext";
+import UserContext from "../context/AccountContext";
 
 const Recipe = () => {
   const [searchTerm, setSearchTerm] = useState("");
