@@ -14,12 +14,10 @@ const RecipeDetail = ({ id }: Props) => {
 
   useEffect(() => {
     getByID(id).then((res) => {
-      console.log(res);
       setDetails(res);
     });
 
     getNutritionInfo(id).then((res) => {
-      console.log(res);
       setNutriInfo(res);
     });
   }, []);
