@@ -1,14 +1,19 @@
-import { ReactNode, useState } from "react";
-import User from "../models/Account";
-import UserContext from "./AccountContext";
+import { ReactNode, useContext, useState } from "react";
+
+import account from "../models/Account";
+import accountContext from "./AccountContext";
 import Recipe from "../models/Recipe";
+import userContext from "./UserContext";
+import Account from "../models/Account";
+import AccountContext from "./AccountContext";
 // import Recipe from "../components/Recipe";
 interface Props {
   children: ReactNode;
 }
 const AccountContextProvider = ({ children }: Props) => {
-  const [user, setUser] = useState<User | null>({
-    _id: "",
+  const { user } = useContext(userContext);
+  const [account, setAccountInfo] = useState<Account | null>({
+    _id: user ? user.uid : "",
     bodyType: {
       height: 0,
       weight: 0,
@@ -30,29 +35,29 @@ const AccountContextProvider = ({ children }: Props) => {
     fats: number,
     recipe: Recipe
   ) => {
-    setUser({
-      _id: user?._id,
-      bodyType: user!.bodyType,
-      totalDailyCalories: user!.totalDailyCalories + calories,
-      totalDailyCarbs: user!.totalDailyCarbs + carbs,
-      totalDailyFats: user!.totalDailyFats + fats,
-      totalDailyProtein: user!.totalDailyProtein + protein,
-      favorites: user!.favorites,
-      calorieGoal: user!.calorieGoal,
-      meals: [...user!.meals, recipe],
+    setAccountInfo({
+      _id: user?.uid,
+      bodyType: account!.bodyType,
+      totalDailyCalories: account!.totalDailyCalories + calories,
+      totalDailyCarbs: account!.totalDailyCarbs + carbs,
+      totalDailyFats: account!.totalDailyFats + fats,
+      totalDailyProtein: account!.totalDailyProtein + protein,
+      favorites: account!.favorites,
+      calorieGoal: account!.calorieGoal,
+      meals: [...account!.meals, recipe],
     });
   };
   const addFavorite = (recipe: Recipe): void => {
-    setUser({
-      _id: user?._id,
-      bodyType: user!.bodyType,
-      totalDailyCalories: user!.totalDailyCalories,
-      totalDailyProtein: user!.totalDailyProtein,
-      totalDailyCarbs: user!.totalDailyCarbs,
-      totalDailyFats: user!.totalDailyFats,
-      calorieGoal: user!.calorieGoal,
-      favorites: [...user!.favorites, recipe],
-      meals: user!.meals,
+    setAccountInfo({
+      _id: user?.uid,
+      bodyType: account!.bodyType,
+      totalDailyCalories: account!.totalDailyCalories,
+      totalDailyProtein: account!.totalDailyProtein,
+      totalDailyCarbs: account!.totalDailyCarbs,
+      totalDailyFats: account!.totalDailyFats,
+      calorieGoal: account!.calorieGoal,
+      favorites: [...account!.favorites, recipe],
+      meals: account!.meals,
     });
   };
 
@@ -63,47 +68,50 @@ const AccountContextProvider = ({ children }: Props) => {
     fats: number,
     recipe: Recipe
   ): void => {
-    const index = user!.meals.findIndex((m) => m.id === recipe.id);
-    setUser({
-      _id: user?._id,
-      bodyType: user!.bodyType,
-      totalDailyCalories: user!.totalDailyCalories - calories,
-      totalDailyProtein: user!.totalDailyProtein - protein,
-      totalDailyCarbs: user!.totalDailyCarbs - carbs,
-      totalDailyFats: user!.totalDailyFats - fats,
-      calorieGoal: user!.calorieGoal,
-      favorites: user!.favorites,
-      meals: [...user!.meals.slice(0, index), ...user!.meals.slice(index + 1)],
+    const index = account!.meals.findIndex((m) => m.id === recipe.id);
+    setAccountInfo({
+      _id: user?.uid,
+      bodyType: account!.bodyType,
+      totalDailyCalories: account!.totalDailyCalories - calories,
+      totalDailyProtein: account!.totalDailyProtein - protein,
+      totalDailyCarbs: account!.totalDailyCarbs - carbs,
+      totalDailyFats: account!.totalDailyFats - fats,
+      calorieGoal: account!.calorieGoal,
+      favorites: account!.favorites,
+      meals: [
+        ...account!.meals.slice(0, index),
+        ...account!.meals.slice(index + 1),
+      ],
     });
   };
   const setCalorieGoal = (calorieGoal: number): void => {
-    setUser({
-      _id: user?._id,
-      bodyType: user!.bodyType,
-      totalDailyCalories: user!.totalDailyCalories,
-      totalDailyProtein: user!.totalDailyProtein,
-      totalDailyCarbs: user!.totalDailyCarbs,
-      totalDailyFats: user!.totalDailyFats,
+    setAccountInfo({
+      _id: user?.uid,
+      bodyType: account!.bodyType,
+      totalDailyCalories: account!.totalDailyCalories,
+      totalDailyProtein: account!.totalDailyProtein,
+      totalDailyCarbs: account!.totalDailyCarbs,
+      totalDailyFats: account!.totalDailyFats,
       calorieGoal: calorieGoal,
-      favorites: [...user!.favorites],
-      meals: user!.meals,
+      favorites: [...account!.favorites],
+      meals: account!.meals,
     });
   };
   const removeFavorite = (recipe: Recipe): void => {
-    const index = user!.favorites.findIndex((r) => r.id === recipe.id);
-    setUser({
-      _id: user?._id,
-      bodyType: user!.bodyType,
-      totalDailyCalories: user!.totalDailyCalories,
-      totalDailyProtein: user!.totalDailyProtein,
-      totalDailyCarbs: user!.totalDailyCarbs,
-      totalDailyFats: user!.totalDailyFats,
-      calorieGoal: user!.calorieGoal,
+    const index = account!.favorites.findIndex((r) => r.id === recipe.id);
+    setAccountInfo({
+      _id: user?.uid,
+      bodyType: account!.bodyType,
+      totalDailyCalories: account!.totalDailyCalories,
+      totalDailyProtein: account!.totalDailyProtein,
+      totalDailyCarbs: account!.totalDailyCarbs,
+      totalDailyFats: account!.totalDailyFats,
+      calorieGoal: account!.calorieGoal,
       favorites: [
-        ...user!.favorites.slice(0, index),
-        ...user!.favorites.slice(index + 1),
+        ...account!.favorites.slice(0, index),
+        ...account!.favorites.slice(index + 1),
       ],
-      meals: user!.meals,
+      meals: account!.meals,
     });
   };
   const setBodyType = (
@@ -112,27 +120,27 @@ const AccountContextProvider = ({ children }: Props) => {
     age: number,
     sex: string
   ): void => {
-    setUser({
-      _id: user?._id,
+    setAccountInfo({
+      _id: account?._id,
       bodyType: {
         height,
         weight,
         age,
         sex,
       },
-      totalDailyCalories: user!.totalDailyCalories,
-      totalDailyProtein: user!.totalDailyProtein,
-      totalDailyCarbs: user!.totalDailyCarbs,
-      totalDailyFats: user!.totalDailyFats,
-      calorieGoal: user!.calorieGoal,
-      favorites: user!.favorites,
-      meals: user!.meals,
+      totalDailyCalories: account!.totalDailyCalories,
+      totalDailyProtein: account!.totalDailyProtein,
+      totalDailyCarbs: account!.totalDailyCarbs,
+      totalDailyFats: account!.totalDailyFats,
+      calorieGoal: account!.calorieGoal,
+      favorites: account!.favorites,
+      meals: account!.meals,
     });
   };
   return (
-    <UserContext.Provider
+    <AccountContext.Provider
       value={{
-        user,
+        account,
         addMacros,
         addFavorite,
         removeFavorite,
@@ -142,7 +150,7 @@ const AccountContextProvider = ({ children }: Props) => {
       }}
     >
       {children}
-    </UserContext.Provider>
+    </AccountContext.Provider>
   );
 };
 export default AccountContextProvider;

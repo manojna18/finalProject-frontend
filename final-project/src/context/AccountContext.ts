@@ -1,8 +1,9 @@
 import { createContext } from "react";
 import User from "../models/Account";
 import Recipe from "../models/Recipe";
+import Account from "../models/Account";
 interface AccountContextModel {
-  user: User | null;
+  account: Account | null;
   addMacros(
     calories: number,
     protein: number,
@@ -24,7 +25,7 @@ interface AccountContextModel {
   setBodyType(height: number, weight: number, age: number, sex: string): void;
 }
 const defaultValues: AccountContextModel = {
-  user: null,
+  account: null,
   addMacros: () => {},
   addFavorite: () => {},
   removeFavorite: () => {},

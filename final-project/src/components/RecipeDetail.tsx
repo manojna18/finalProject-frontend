@@ -3,7 +3,7 @@ import "./css/RecipeDetail.css";
 import { RecipeByID } from "../models/RecipeByID";
 import { getByID, getNutritionInfo } from "../services/spoonacularApiService";
 import NutrientInfo from "../models/NutrientInfo";
-import UserContext from "../context/AccountContext";
+import AccountContext from "../context/AccountContext";
 import Recipe from "../models/Recipe";
 
 interface Props {
@@ -14,7 +14,7 @@ interface Props {
 const RecipeDetail = ({ id, recipe }: Props) => {
   const [details, setDetails] = useState<RecipeByID>();
   const [nutriInfo, setNutriInfo] = useState<NutrientInfo>();
-  const { user, addMacros, removeMeal } = useContext(UserContext);
+  const { account, addMacros, removeMeal } = useContext(AccountContext);
   const [meals, setMeals] = useState<Recipe[]>([]);
 
   useEffect(() => {
@@ -32,10 +32,6 @@ const RecipeDetail = ({ id, recipe }: Props) => {
       });
     }
   }, []);
-
-  // const removeFromPlateHandler = (): void => {
-  //   removeMeal(recipe);
-  // };
 
   return (
     <>

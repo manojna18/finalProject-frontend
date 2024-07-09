@@ -4,7 +4,8 @@ import "./css/RecipeCard.css";
 import RecipeDetail from "./RecipeDetail";
 import { getByID } from "../services/spoonacularApiService";
 import RecipeInterface from "../models/Recipe";
-import UserContext from "../context/AccountContext";
+import AccountContext from "../context/AccountContext";
+import { addAccount } from "../services/accountApiService";
 
 interface Prop {
   recipe: Recipe;
@@ -12,9 +13,9 @@ interface Prop {
 
 const RecipeCard = ({ recipe }: Prop) => {
   const [detailBool, setDetailBool] = useState(false);
-  const { user, addFavorite, removeFavorite } = useContext(UserContext);
+  const { account, addFavorite, removeFavorite } = useContext(AccountContext);
   const [favorite, setFavorite] = useState(
-    user?.favorites.find((item) => item.id === recipe.id) ? true : false
+    account?.favorites.find((item) => item.id === recipe.id) ? true : false
   );
 
   const showItemDetails = (recipe: RecipeInterface) => {
@@ -30,6 +31,8 @@ const RecipeCard = ({ recipe }: Prop) => {
       removeFavorite(recipe);
     } else {
       addFavorite(recipe);
+      addAccount(account!);
+      console.log();
     }
     setFavorite(!favorite);
   };

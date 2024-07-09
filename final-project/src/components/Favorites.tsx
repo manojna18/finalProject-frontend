@@ -1,13 +1,14 @@
 import { useContext } from "react";
 import "./css/Favorites.css";
-import UserContext from "../context/AccountContext";
+import AccountContext from "../context/AccountContext";
 import RecipeCard from "./RecipeCard";
+import { addAccount } from "../services/accountApiService";
 
 const Favorites = () => {
-  const { user } = useContext(UserContext);
+  const { account } = useContext(AccountContext);
   return (
     <div className="Favorites">
-      {user?.favorites.map((r) => (
+      {account?.favorites.map((r) => (
         <RecipeCard recipe={r} />
       ))}
     </div>
