@@ -4,15 +4,18 @@ import { RecipeByID } from "../models/RecipeByID";
 import { getByID, getNutritionInfo } from "../services/spoonacularApiService";
 import NutrientInfo from "../models/NutrientInfo";
 import UserContext from "../context/UserContext";
+import Recipe from "../models/Recipe";
 
 interface Props {
   id: number;
+  recipe: Recipe;
 }
 
-const RecipeDetail = ({ id }: Props) => {
+const RecipeDetail = ({ id, recipe }: Props) => {
   const [details, setDetails] = useState<RecipeByID>();
   const [nutriInfo, setNutriInfo] = useState<NutrientInfo>();
-  const { user, addMacros } = useContext(UserContext);
+  const { user, addMacros, removeMeal } = useContext(UserContext);
+  const [meals, setMeals] = useState<Recipe[]>([]);
 
   useEffect(() => {
     let ignore = false;
@@ -29,6 +32,10 @@ const RecipeDetail = ({ id }: Props) => {
       });
     }
   }, []);
+
+  // const removeFromPlateHandler = (): void => {
+  //   removeMeal(recipe);
+  // };
 
   return (
     <>
@@ -97,11 +104,30 @@ const RecipeDetail = ({ id }: Props) => {
               nutriInfo!.nutrients.find(
                 (item) => item.name === "Carbohydrates"
               )!.amount,
-              nutriInfo!.nutrients.find((item) => item.name === "Fat")!.amount
+              nutriInfo!.nutrients.find((item) => item.name === "Fat")!.amount,
+              recipe
             );
           }}
         >
           Add To Plate
+        </button>
+        <button
+          className="RemoveFromPlateBtn"
+          onClick={() => {
+            removeMeal(
+              nutriInfo!.nutrients.find((item) => item.name === "Calories")!
+                .amount,
+              nutriInfo!.nutrients.find((item) => item.name === "Protein")!
+                .amount,
+              nutriInfo!.nutrients.find(
+                (item) => item.name === "Carbohydrates"
+              )!.amount,
+              nutriInfo!.nutrients.find((item) => item.name === "Fat")!.amount,
+              recipe
+            );
+          }}
+        >
+          Remove from Plate
         </button>
       </div>
     </>

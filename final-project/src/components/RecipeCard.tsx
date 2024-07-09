@@ -13,7 +13,9 @@ interface Prop {
 const RecipeCard = ({ recipe }: Prop) => {
   const [detailBool, setDetailBool] = useState(false);
   const { user, addFavorite, removeFavorite } = useContext(UserContext);
-  const [favorite, setFavorite] = useState(user?.favorites.find((item) => item.id === recipe.id) ? true : false);
+  const [favorite, setFavorite] = useState(
+    user?.favorites.find((item) => item.id === recipe.id) ? true : false
+  );
 
   const showItemDetails = (recipe: RecipeInterface) => {
     console.dir(recipe);
@@ -24,14 +26,13 @@ const RecipeCard = ({ recipe }: Prop) => {
   };
 
   const favoriteHandler = () => {
-    if(favorite) {
+    if (favorite) {
       removeFavorite(recipe);
-    }else {
+    } else {
       addFavorite(recipe);
     }
     setFavorite(!favorite);
-
-  }
+  };
 
   return (
     <div className="RecipeCard">
@@ -49,10 +50,14 @@ const RecipeCard = ({ recipe }: Prop) => {
 
         <label htmlFor="">
           Favorite
-        <input type="checkbox" checked={favorite} onChange={favoriteHandler}/>
+          <input
+            type="checkbox"
+            checked={favorite}
+            onChange={favoriteHandler}
+          />
         </label>
         <div className={detailBool ? "itemDetails" : "itemDetails hidden"}>
-          <RecipeDetail id={recipe.id} />
+          <RecipeDetail id={recipe.id} recipe={recipe} />
         </div>
       </div>
     </div>

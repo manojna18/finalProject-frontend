@@ -7,10 +7,20 @@ interface UserContextModel {
     calories: number,
     protein: number,
     carbs: number,
-    fats: number
+    fats: number,
+    recipe: Recipe
   ): void;
   addFavorite(recipe: Recipe): void;
+  // addMeal(recipe: Recipe): void;
+  removeMeal(
+    calories: number,
+    protein: number,
+    carbs: number,
+    fats: number,
+    recipe: Recipe
+  ): void;
   removeFavorite(recipe: Recipe): void;
+  setCalorieGoal(calorieGoal: number): void;
   setBodyType(height: number, weight: number, age: number, sex: string): void;
 }
 const defaultValues: UserContextModel = {
@@ -19,6 +29,9 @@ const defaultValues: UserContextModel = {
   addFavorite: () => {},
   removeFavorite: () => {},
   setBodyType: () => {},
+  setCalorieGoal: () => {},
+  // addMeal: () => {},
+  removeMeal: () => {},
 };
 const UserContext = createContext(defaultValues);
 export default UserContext;

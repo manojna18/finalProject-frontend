@@ -8,7 +8,9 @@ export default interface User {
   totalDailyProtein: number;
   totalDailyCarbs: number;
   totalDailyFats: number;
-  favorites: Recipe [];
+  favorites: Recipe[];
+  calorieGoal: number;
+  meals: Recipe[];
   // addMacros(
   //   calories: number,
   //   protein: number,
