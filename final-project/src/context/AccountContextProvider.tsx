@@ -6,7 +6,11 @@ import Recipe from "../models/Recipe";
 import userContext from "./UserContext";
 import Account from "../models/Account";
 import AccountContext from "./AccountContext";
-import { addAccount, editAccount, getAccountInfo } from "../services/accountApiService";
+import {
+  addAccount,
+  editAccount,
+  getAccountInfo,
+} from "../services/accountApiService";
 // import Recipe from "../components/Recipe";
 interface Props {
   children: ReactNode;
@@ -32,43 +36,44 @@ const AccountContextProvider = ({ children }: Props) => {
   const createAccount = () => {
     addAccount({
       ...account!,
-      userId: user?.uid
+      userId: user?.uid,
     }).then((res) => {
       console.log(res);
       console.log(user!.uid);
-      getAccountInfo(user!.uid).then(res => {
+      getAccountInfo(user!.uid).then((res) => {
         console.log(res);
-        setAccountInfo(res)
+        setAccountInfo(res);
       });
     });
-    
-  }
+  };
 
   const updateAccount = () => {
     console.log("updateAccount");
-    if(account && account.userId && account._id) {
+    if (account && account.userId && account._id) {
       // console.log(account)
-      getAccountInfo(account.userId).then(res => setAccountInfo(res));
-    } else if(user && user.uid) {
+      getAccountInfo(account.userId).then((res) => setAccountInfo(res));
+    } else if (user && user.uid) {
       console.log(account);
       console.log(user);
-      getAccountInfo(user.uid).then(res => {
-        console.log(res)
-        if(res && res._id) {
-          console.log(res)
-          setAccountInfo(res)
-        } else {
-          console.log(res)
-          createAccount();
-          console.log("Account created");
-        }
-      }).catch((err) => {
-        console.log(err);
-      });
-    }else {
-      console.log("No account ID found!")
+      getAccountInfo(user.uid)
+        .then((res) => {
+          console.log(res);
+          if (res && res._id) {
+            console.log(res);
+            setAccountInfo(res);
+          } else {
+            console.log(res);
+            createAccount();
+            console.log("Account created");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      console.log("No account ID found!");
     }
-  }
+  };
 
   const addMacros = (
     calories: number,
@@ -84,11 +89,11 @@ const AccountContextProvider = ({ children }: Props) => {
         totalDailyCarbs: account.totalDailyCarbs + carbs,
         totalDailyFats: account.totalDailyFats + fats,
         totalDailyProtein: account.totalDailyProtein + protein,
-        meals: [...account.meals, recipe]
+        meals: [...account.meals, recipe],
       });
       updateAccount();
     } else {
-      console.log("No account found!")
+      console.log("No account found!");
     }
   };
   const addFavorite = (recipe: Recipe): void => {
@@ -99,20 +104,20 @@ const AccountContextProvider = ({ children }: Props) => {
       });
       updateAccount();
     } else {
-      console.log("No account found!")
+      console.log("No account found!");
     }
   };
 
-  const removeMeal = (
+  const removeMeal = async (
     calories: number,
     protein: number,
     carbs: number,
     fats: number,
     recipe: Recipe
-  ): void => {
+  ): Promise<void> => {
     const index = account!.meals.findIndex((m) => m.id === recipe.id);
     if (account) {
-      editAccount({
+      await editAccount({
         ...account!,
         totalDailyCalories: account.totalDailyCalories - calories,
         totalDailyCarbs: account.totalDailyCarbs - carbs,
@@ -125,18 +130,18 @@ const AccountContextProvider = ({ children }: Props) => {
       });
       updateAccount();
     } else {
-      console.log("No account found!")
+      console.log("No account found!");
     }
   };
-  const setCalorieGoal = (calorieGoal: number): void => {
+  const setCalorieGoal = async (calorieGoal: number): Promise<void> => {
     if (account) {
-      editAccount({
+      await editAccount({
         ...account,
         calorieGoal: calorieGoal,
       });
       updateAccount();
     } else {
-      console.log("No account found!")
+      console.log("No account found!");
     }
   };
   const removeFavorite = (recipe: Recipe): void => {
@@ -151,17 +156,17 @@ const AccountContextProvider = ({ children }: Props) => {
       });
       updateAccount();
     } else {
-      console.log("No account found!")
+      console.log("No account found!");
     }
   };
-  const setBodyType = (
+  const setBodyType = async (
     height: number,
     weight: number,
     age: number,
     sex: string
-  ): void => {
+  ): Promise<void> => {
     if (account) {
-      editAccount({
+      await editAccount({
         ...account,
         bodyType: {
           height,
@@ -172,7 +177,7 @@ const AccountContextProvider = ({ children }: Props) => {
       });
       updateAccount();
     } else {
-      console.log("No account found!")
+      console.log("No account found!");
     }
   };
   return (

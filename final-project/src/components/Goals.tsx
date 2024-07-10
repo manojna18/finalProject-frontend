@@ -1,6 +1,7 @@
 import "./css/Goals.css";
-import UserContext from "../context/AccountContext";
+import UserContext from "../context/UserContext";
 import { FormEvent, useContext, useEffect, useState } from "react";
+import AccountContext from "../context/AccountContext";
 
 const Goals = () => {
   const [userHeight, setUserHeight] = useState<string>("");
@@ -8,7 +9,8 @@ const Goals = () => {
   const [userAge, setUserAge] = useState<string>("");
   const [userSex, setUserSex] = useState("F");
   const [displayError, setDisplayError] = useState(false);
-  const { user, setBodyType, setCalorieGoal } = useContext(UserContext);
+  const { user } = useContext(UserContext);
+  const { account, setBodyType, setCalorieGoal } = useContext(AccountContext);
 
   const calculateCalorieGoal = (): number => {
     const offset: number = userSex === "F" ? -161 : 5;
@@ -19,13 +21,13 @@ const Goals = () => {
     );
   };
 
-  const submitHandler = (e: FormEvent) => {
+  const submitHandler = async (e: FormEvent) => {
     e.preventDefault();
     let height: number = +userHeight;
     let weight: number = +userWeight;
     let age: number = +userAge;
     if (height && weight && age) {
-      setBodyType(height, weight, age, userSex);
+      await setBodyType(height, weight, age, userSex);
       setCalorieGoal(calculateCalorieGoal());
       //ProteinGoal = weight(in pounds) * 0.36
       //CarbGoal = .45 * calorieGoal
@@ -42,9 +44,12 @@ const Goals = () => {
   return (
     <div className="Goals">
       <h2>Goals</h2>
-      <p>Calorie Goal: {user?.calorieGoal}</p>
-      <p>{`Height: ${user?.bodyType.height} Weight: ${user?.bodyType.weight} Age: ${user?.bodyType.age} Sex: ${user?.bodyType.sex}`}</p>
-      <p>Current Calories: {user?.totalDailyCalories?.toFixed(2)}</p>
+      <p>Calorie Goal: {account?.calorieGoal}</p>
+      <p>Height: {account?.bodyType.height}</p>
+      <p>Weight: {account?.bodyType.weight}</p>
+      <p>Age: {account?.bodyType.age} </p>
+      <p>Sex: {account?.bodyType.sex}`</p>
+      <p>Current Calories: {account?.totalDailyCalories?.toFixed(2)}</p>
       <p>Enter your details to track nutrition goals</p>
       <form onSubmit={submitHandler}>
         <label htmlFor="height">Height (in inch):</label>
