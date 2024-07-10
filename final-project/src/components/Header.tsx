@@ -23,39 +23,43 @@ const Header = () => {
 
   return (
     <header className="Header">
-      <h1>
-        <Link to="/">PlantPlate</Link>
-      </h1>
-      {user === null ? (
-        <button onClick={singInWithGoogle}>Sign In With Google</button>
-      ) : (
-        <>
-          <p>Hi, {user.displayName}</p>
-          <img
-            src={user.photoURL ?? ""}
-            alt="user image"
-            className="user-photo"
-          />
-          <Link to="/favorites">Your favorites</Link>
-          <button onClick={singOutOfGoogle}>Sign Out</button>
-        </>
-      )}
-      <nav>
-        <ul>
-          <li className={hidden ? "hidden" : ""}>
-            <Link to="/tracker">Nutrition Tracker</Link>
-          </li>
-          <li className={hidden ? "hidden" : ""}>
-            <Link to="/barcode-scanner">Barcode Scanner</Link>
-          </li>
-          <li>
-            <Link to="/recipes/:id">Recipes</Link>
-          </li>
-          <li className={hidden ? "hidden" : ""}>
-            <Link to="/goals">Goals</Link>
-          </li>
-        </ul>
-      </nav>
+      <section className="headerGroup1">
+        <h1>
+          <Link to="/">PlantPlate</Link>
+        </h1>
+        {user === null ? (
+          <button onClick={singInWithGoogle}>Sign In With Google</button>
+        ) : (
+          <>
+            <p>Hi, {user.displayName}</p>
+            <img
+              src={user.photoURL ?? ""}
+              alt="user image"
+              className="user-photo"
+            />
+            <Link to="/favorites">Your favorites</Link>
+            <button onClick={singOutOfGoogle}>Sign Out</button>
+          </>
+        )}
+      </section>
+      <section className="headingGroup2">
+        <nav>
+          <ul>
+            <li className={hidden ? "hidden" : ""}>
+              <Link to="/tracker">Nutrition Tracker</Link>
+            </li>
+            <li className={hidden ? "hidden" : ""}>
+              <Link to="/barcode-scanner">Barcode Scanner</Link>
+            </li>
+            <li>
+              <Link to="/recipes/:id">Recipes</Link>
+            </li>
+            <li className={hidden ? "hidden" : ""}>
+              <Link to="/goals">Goals</Link>
+            </li>
+          </ul>
+        </nav>
+      </section>
     </header>
   );
 };

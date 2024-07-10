@@ -1,7 +1,9 @@
 .NutritionTracker .warning {
   color: red;
 }
-
+.NutritionTracker {
+  padding: 15px;
+}
 .PieChart {
   width: 300px;
   height: 300px;

@@ -24,7 +24,7 @@ const Recipe = () => {
     });
     setSearchTerm("");
   };
-
+  console.log(recipeList);
   return (
     <div className="Recipe">
       <form onSubmit={(e) => handleSubmit(e)} id="search-form">
