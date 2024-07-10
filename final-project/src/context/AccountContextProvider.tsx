@@ -53,7 +53,8 @@ const AccountContextProvider = ({ children }: Props) => {
       console.log(account);
       console.log(user);
       getAccountInfo(user.uid).then(res => {
-        if(res._id) {
+        console.log(res)
+        if(res && res._id) {
           console.log(res)
           setAccountInfo(res)
         } else {
