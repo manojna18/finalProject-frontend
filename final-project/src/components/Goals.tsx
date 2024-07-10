@@ -8,6 +8,7 @@ const Goals = () => {
   const [userWeight, setUserWeight] = useState<string>("");
   const [userAge, setUserAge] = useState<string>("");
   const [userSex, setUserSex] = useState("F");
+  const [userExercise, setUserExercise] = useState("light");
   const [displayError, setDisplayError] = useState(false);
   const { user } = useContext(UserContext);
   const { account, setBodyType, setCalorieGoal } = useContext(AccountContext);
@@ -16,9 +17,26 @@ const Goals = () => {
     const offset: number = userSex === "F" ? -161 : 5;
     let height = +userHeight * 2.54;
     let weight = +userWeight / 2.205;
-    return +(height * 6.25 + 9.99 * weight - 4.92 * +userAge + offset).toFixed(
-      2
-    );
+    const lightActivityLevel = 1.375;
+    const moderateActivityLevel = 1.55;
+    const veryActiveActivityLevel = 1.725;
+
+    if (userExercise === "light") {
+      return (
+        +(height * 6.25 + 9.99 * weight - 4.92 * +userAge + offset).toFixed(2) *
+        lightActivityLevel
+      );
+    } else if (userExercise === "moderate") {
+      return (
+        +(height * 6.25 + 9.99 * weight - 4.92 * +userAge + offset).toFixed(2) *
+        moderateActivityLevel
+      );
+    } else if (userExercise === "active") {
+      return (
+        +(height * 6.25 + 9.99 * weight - 4.92 * +userAge + offset).toFixed(2) *
+        veryActiveActivityLevel
+      );
+    }
   };
 
   const submitHandler = async (e: FormEvent) => {
@@ -83,6 +101,18 @@ const Goals = () => {
         >
           <option value="F">Female</option>
           <option value="M">Male</option>
+        </select>
+        <label htmlFor="exercise">Exercise Level:</label>
+        <select
+          name=""
+          id="exercise"
+          onChange={(e) => {
+            setUserExercise(e.target.value);
+          }}
+        >
+          <option value="light">Light: sports 1-3 days​ a week</option>
+          <option value="moderate">Moderate: sports 3-5 days​ a week</option>
+          <option value="active">Active: sports 6-7 days a week</option>
         </select>
         <button>Submit</button>
       </form>

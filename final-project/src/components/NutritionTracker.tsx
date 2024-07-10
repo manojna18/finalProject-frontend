@@ -47,7 +47,7 @@ const NutritionTracker = () => {
       {
         label: "Calories",
         data: [proteinConsumedInCal, carbsConsumedInCal, fatConsumedInCal],
-        backgroundColor: ["#FF0000", "#0000FF", "#00FF00"],
+        backgroundColor: ["#00FF00", "#0000FF", "#FF0000"],
       },
     ],
     borderWidth: 0.5,

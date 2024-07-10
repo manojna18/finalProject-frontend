@@ -14,7 +14,7 @@ const Recipe = () => {
   const [currentCarbs, setCurrentCarbs] = useState<number>(0);
   const [currentFats, setCurrentFats] = useState<number>(0);
 
-  const { account, addMacros } = useContext(AccountContext);
+  // const { account, addMacros } = useContext(AccountContext);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -27,11 +27,6 @@ const Recipe = () => {
 
   return (
     <div className="Recipe">
-      <p>Calories: {account?.totalDailyCalories}</p>
-      <p>Protein: {account?.totalDailyProtein}</p>
-      <p>Carbs: {account?.totalDailyCarbs}</p>
-      <p>Fats: {account?.totalDailyFats}</p>
-
       <form onSubmit={(e) => handleSubmit(e)} id="search-form">
         <h3>Search for recipes with a keyword(eg: "avocado", "salad")</h3>
         <label htmlFor="search-bar">Enter a keyword</label>

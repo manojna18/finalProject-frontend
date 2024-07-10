@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Recipe from "../models/Recipe";
 import "./css/RecipeCard.css";
 import RecipeDetail from "./RecipeDetail";
@@ -6,6 +6,8 @@ import { getByID } from "../services/spoonacularApiService";
 import RecipeInterface from "../models/Recipe";
 import AccountContext from "../context/AccountContext";
 import { addAccount } from "../services/accountApiService";
+import userContext from "../context/UserContext";
+import { useNavigate } from "react-router-dom";
 
 interface Prop {
   recipe: Recipe;
@@ -17,6 +19,9 @@ const RecipeCard = ({ recipe }: Prop) => {
   const [favorite, setFavorite] = useState(
     account?.favorites.find((item) => item.id === recipe.id) ? true : false
   );
+  const { user } = useContext(userContext);
+  const [hidden, setHidden] = useState(false);
+  const navigate = useNavigate();
 
   const showItemDetails = (recipe: RecipeInterface) => {
     console.dir(recipe);
@@ -31,11 +36,20 @@ const RecipeCard = ({ recipe }: Prop) => {
       removeFavorite(recipe);
     } else {
       addFavorite(recipe);
-      
+
       console.log();
     }
     setFavorite(!favorite);
   };
+
+  useEffect(() => {
+    if (!user) {
+      setHidden(true);
+      navigate("/");
+    } else {
+      setHidden(false);
+    }
+  }, [user]);
 
   return (
     <div className="RecipeCard">
@@ -51,7 +65,7 @@ const RecipeCard = ({ recipe }: Prop) => {
           Read more
         </button>
 
-        <label htmlFor="">
+        <label htmlFor="" className={hidden ? "hidden" : ""}>
           Favorite
           <input
             type="checkbox"

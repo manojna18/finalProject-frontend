@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./css/Header.css";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import userContext from "../context/UserContext";
 import { singInWithGoogle, singOutOfGoogle } from "../firebaseConfig";
 import AccountContext from "../context/AccountContext";
@@ -8,12 +8,18 @@ import AccountContext from "../context/AccountContext";
 const Header = () => {
   const { user } = useContext(userContext);
   const { account, updateAccount } = useContext(AccountContext);
-
-
+  const [hidden, setHidden] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     updateAccount();
-  }, [user])
+    if (!user) {
+      setHidden(true);
+      navigate("/");
+    } else {
+      setHidden(false);
+    }
+  }, [user]);
 
   return (
     <header className="Header">
@@ -36,16 +42,16 @@ const Header = () => {
       )}
       <nav>
         <ul>
-          <li>
+          <li className={hidden ? "hidden" : ""}>
             <Link to="/tracker">Nutrition Tracker</Link>
           </li>
-          <li>
+          <li className={hidden ? "hidden" : ""}>
             <Link to="/barcode-scanner">Barcode Scanner</Link>
           </li>
           <li>
             <Link to="/recipes/:id">Recipes</Link>
           </li>
-          <li>
+          <li className={hidden ? "hidden" : ""}>
             <Link to="/goals">Goals</Link>
           </li>
         </ul>

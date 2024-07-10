@@ -5,6 +5,8 @@ import { getByID, getNutritionInfo } from "../services/spoonacularApiService";
 import NutrientInfo from "../models/NutrientInfo";
 import AccountContext from "../context/AccountContext";
 import Recipe from "../models/Recipe";
+import userContext from "../context/UserContext";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   id: number;
@@ -16,6 +18,9 @@ const RecipeDetail = ({ id, recipe }: Props) => {
   const [nutriInfo, setNutriInfo] = useState<NutrientInfo>();
   const { account, addMacros, removeMeal } = useContext(AccountContext);
   const [meals, setMeals] = useState<Recipe[]>([]);
+  const { user } = useContext(userContext);
+  const [disabled, setDisabled] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     let ignore = false;
@@ -31,7 +36,13 @@ const RecipeDetail = ({ id, recipe }: Props) => {
         setNutriInfo(res);
       });
     }
-  }, []);
+    if (!user) {
+      setDisabled(true);
+      navigate("/");
+    } else {
+      setDisabled(false);
+    }
+  }, [user]);
 
   return (
     <>
@@ -104,6 +115,8 @@ const RecipeDetail = ({ id, recipe }: Props) => {
               recipe
             );
           }}
+          disabled={disabled}
+          title="Sign in with Google"
         >
           Add To Plate
         </button>
@@ -122,6 +135,8 @@ const RecipeDetail = ({ id, recipe }: Props) => {
               recipe
             );
           }}
+          disabled={disabled}
+          title="Sign in with Google"
         >
           Remove from Plate
         </button>
