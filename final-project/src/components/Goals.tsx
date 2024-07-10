@@ -27,8 +27,8 @@ const Goals = () => {
     let weight: number = +userWeight;
     let age: number = +userAge;
     if (height && weight && age) {
-      await setBodyType(height, weight, age, userSex);
-      setCalorieGoal(calculateCalorieGoal());
+      await setBodyType(height, weight, age, userSex, calculateCalorieGoal());
+      //setCalorieGoal(calculateCalorieGoal());
       //ProteinGoal = weight(in pounds) * 0.36
       //CarbGoal = .45 * calorieGoal
       //FatGoal = .3 * calorieGoal

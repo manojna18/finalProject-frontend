@@ -23,7 +23,7 @@ interface AccountContextModel {
   ): void;
   removeFavorite(recipe: Recipe): void;
   setCalorieGoal(calorieGoal: number): void;
-  setBodyType(height: number, weight: number, age: number, sex: string): void;
+  setBodyType(height: number, weight: number, age: number, sex: string, calorieGoal: number): void;
 }
 const defaultValues: AccountContextModel = {
   account: null,

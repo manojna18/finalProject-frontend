@@ -163,7 +163,8 @@ const AccountContextProvider = ({ children }: Props) => {
     height: number,
     weight: number,
     age: number,
-    sex: string
+    sex: string,
+    calorieGoal: number
   ): Promise<void> => {
     if (account) {
       await editAccount({
@@ -174,6 +175,7 @@ const AccountContextProvider = ({ children }: Props) => {
           age,
           sex,
         },
+        calorieGoal: calorieGoal
       });
       updateAccount();
     } else {
