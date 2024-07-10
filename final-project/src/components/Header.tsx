@@ -1,11 +1,19 @@
 import { Link } from "react-router-dom";
 import "./css/Header.css";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import userContext from "../context/UserContext";
 import { singInWithGoogle, singOutOfGoogle } from "../firebaseConfig";
+import AccountContext from "../context/AccountContext";
 
 const Header = () => {
   const { user } = useContext(userContext);
+  const { account, updateAccount } = useContext(AccountContext);
+
+
+
+  useEffect(() => {
+    updateAccount();
+  }, [user])
 
   return (
     <header className="Header">
@@ -13,7 +21,7 @@ const Header = () => {
         <Link to="/">PlantPlate</Link>
       </h1>
       {user === null ? (
-        <button onClick={singInWithGoogle}>Sing In With Google</button>
+        <button onClick={singInWithGoogle}>Sign In With Google</button>
       ) : (
         <>
           <p>Hi, {user.displayName}</p>
@@ -23,7 +31,7 @@ const Header = () => {
             className="user-photo"
           />
           <Link to="/favorites">Your favorites</Link>
-          <button onClick={singOutOfGoogle}>Sing Out</button>
+          <button onClick={singOutOfGoogle}>Sign Out</button>
         </>
       )}
       <nav>

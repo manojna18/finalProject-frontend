@@ -4,6 +4,7 @@ import Recipe from "../models/Recipe";
 import Account from "../models/Account";
 interface AccountContextModel {
   account: Account | null;
+  updateAccount(): void;
   addMacros(
     calories: number,
     protein: number,
@@ -26,6 +27,7 @@ interface AccountContextModel {
 }
 const defaultValues: AccountContextModel = {
   account: null,
+  updateAccount: () => {}, 
   addMacros: () => {},
   addFavorite: () => {},
   removeFavorite: () => {},
