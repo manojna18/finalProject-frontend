@@ -31,7 +31,7 @@ const RecipeCard = ({ recipe }: Prop) => {
       removeFavorite(recipe);
     } else {
       addFavorite(recipe);
-      addAccount(account!);
+      
       console.log();
     }
     setFavorite(!favorite);

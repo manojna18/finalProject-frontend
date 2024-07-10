@@ -9,8 +9,8 @@ import PieChart from "./PieChart";
 Chart.register(ArcElement);
 
 const NutritionTracker = () => {
-  const { user } = useContext(AccountContext);
-  const calorieGoal = user!.calorieGoal;
+  const { account } = useContext(AccountContext);
+  const calorieGoal = account!.calorieGoal;
 
   //The calorie values per gram
   const proteinCaloriePerGram = 4;
@@ -36,9 +36,10 @@ const NutritionTracker = () => {
     fatCaloriePerGram
   ).toFixed(2);
 
-  const carbsConsumedInCal = user?.totalDailyCarbs! * carbCaloriePerGram;
-  const proteinConsumedInCal = user?.totalDailyProtein! * proteinCaloriePerGram;
-  const fatConsumedInCal = user?.totalDailyFats! * fatCaloriePerGram;
+  const carbsConsumedInCal = account?.totalDailyCarbs! * carbCaloriePerGram;
+  const proteinConsumedInCal =
+    account?.totalDailyProtein! * proteinCaloriePerGram;
+  const fatConsumedInCal = account?.totalDailyFats! * fatCaloriePerGram;
 
   const data = {
     labels: ["Protein", "Carbs", "Fats"],
@@ -51,7 +52,7 @@ const NutritionTracker = () => {
     ],
     borderWidth: 0.5,
   };
-  console.log(user?.meals);
+  console.log(account?.meals);
 
   return (
     <div className="NutritionTracker">
@@ -60,38 +61,38 @@ const NutritionTracker = () => {
       </>
       <div>
         <p>Goals</p>
-        <p>Calorie Goal: {user?.calorieGoal}</p>
+        <p>Calorie Goal: {account?.calorieGoal}</p>
         <p>Protein: {proteinLimitInGrams}</p>
         <p>Carbs: {carbLimitInGrams}</p>
         <p>Fats: {fatLimitInGrams}</p>
       </div>
-      <p>Calories: {user?.totalDailyCalories?.toFixed(2)}</p>
-      <p>Protein: {user?.totalDailyProtein?.toFixed(2)}</p>
-      <p>Carbs: {user?.totalDailyCarbs?.toFixed(2)}</p>
-      <p>Fats: {user?.totalDailyFats?.toFixed(2)}</p>
+      <p>Calories: {account?.totalDailyCalories?.toFixed(2)}</p>
+      <p>Protein: {account?.totalDailyProtein?.toFixed(2)}</p>
+      <p>Carbs: {account?.totalDailyCarbs?.toFixed(2)}</p>
+      <p>Fats: {account?.totalDailyFats?.toFixed(2)}</p>
 
       <p>What I ate in a day</p>
-      {user?.meals.map((item) => {
+      {account?.meals.map((item) => {
         return <RecipeCard recipe={item} />;
       })}
 
-      {user!.totalDailyCalories > calorieGoal && (
+      {account!.totalDailyCalories > calorieGoal && (
         <p className="warning">
           {" "}
           you have exceeded your calorie goal for a day
         </p>
       )}
-      {user!.totalDailyProtein > proteinLimitInGrams && (
+      {account!.totalDailyProtein > proteinLimitInGrams && (
         <p className="warning">
           you have exceeded recommended protein amount for a day
         </p>
       )}
-      {user!.totalDailyCarbs > carbLimitInGrams && (
+      {account!.totalDailyCarbs > carbLimitInGrams && (
         <p className="warning">
           you have exceeded recommended carbs amount for a day
         </p>
       )}
-      {user!.totalDailyFats > fatLimitInGrams && (
+      {account!.totalDailyFats > fatLimitInGrams && (
         <p className="warning">
           you have exceeded recommended fats amount for a day
         </p>

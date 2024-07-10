@@ -6,6 +6,7 @@ import Recipe from "../models/Recipe";
 import userContext from "./UserContext";
 import Account from "../models/Account";
 import AccountContext from "./AccountContext";
+import { editAccount, getAccountInfo } from "../services/accountApiService";
 // import Recipe from "../components/Recipe";
 interface Props {
   children: ReactNode;
@@ -35,17 +36,16 @@ const AccountContextProvider = ({ children }: Props) => {
     fats: number,
     recipe: Recipe
   ) => {
-    setAccountInfo({
-      _id: user?.uid,
-      bodyType: account!.bodyType,
-      totalDailyCalories: account!.totalDailyCalories + calories,
-      totalDailyCarbs: account!.totalDailyCarbs + carbs,
-      totalDailyFats: account!.totalDailyFats + fats,
-      totalDailyProtein: account!.totalDailyProtein + protein,
-      favorites: account!.favorites,
-      calorieGoal: account!.calorieGoal,
-      meals: [...account!.meals, recipe],
-    });
+    if (account) {
+      editAccount({
+        ...account!,
+        totalDailyCalories: account!.totalDailyCalories + calories,
+        totalDailyCarbs: account!.totalDailyCarbs + carbs,
+        totalDailyFats: account!.totalDailyFats + fats,
+        totalDailyProtein: account!.totalDailyProtein + protein,
+      });
+      getAccountInfo(account._id!).then((res) => setAccountInfo(res));
+    }
   };
   const addFavorite = (recipe: Recipe): void => {
     setAccountInfo({
