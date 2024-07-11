@@ -16,7 +16,7 @@ const Header = () => {
     updateAccount();
     if (!user) {
       setHidden(true);
-      navigate("/");
+      // navigate("/");
     } else {
       setHidden(false);
     }
@@ -62,7 +62,7 @@ const Header = () => {
               </Link>
             </li>
             <li>
-              <Link to="/recipes/:id" className="link nav">
+              <Link to="/recipes" className="link nav">
                 Recipes
               </Link>
             </li>

@@ -45,7 +45,7 @@ const RecipeCard = ({ recipe }: Prop) => {
   useEffect(() => {
     if (!user) {
       setHidden(true);
-      navigate("/");
+      // navigate("/");
     } else {
       setHidden(false);
     }

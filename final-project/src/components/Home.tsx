@@ -32,7 +32,7 @@ const Home = () => {
         and the environment!
       </h1>
       <h3>If you need some vegan recipes, let us help!</h3>
-      <Link to="/recipes/:id">
+      <Link to="/recipes">
         <button>Find my next meal</button>
       </Link>
     </div>
