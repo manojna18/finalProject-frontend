@@ -38,7 +38,7 @@ const RecipeDetail = ({ id, recipe }: Props) => {
     }
     if (!user) {
       setDisabled(true);
-      navigate("/");
+      //navigate("/");
     } else {
       setDisabled(false);
     }
