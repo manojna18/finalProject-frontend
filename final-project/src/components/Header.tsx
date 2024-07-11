@@ -57,7 +57,7 @@ const Header = () => {
               </Link>
             </li>
             <li className={hidden ? "hidden" : ""}>
-              <Link to="/barcode-scanner" className="link nav">
+              <Link to="/barcode-scanner" className="link nav hidden">
                 Barcode Scanner
               </Link>
             </li>
