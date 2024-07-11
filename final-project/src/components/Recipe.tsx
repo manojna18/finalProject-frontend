@@ -1,18 +1,18 @@
-import { FormEvent, useContext, useEffect, useState } from "react";
+import { FormEvent, useState } from "react";
 import "./css/Recipe.css";
-import { getByID, getRecipe } from "../services/spoonacularApiService";
+import { getRecipe } from "../services/spoonacularApiService";
 import RecipeInterface from "../models/Recipe";
 import RecipeCard from "./RecipeCard";
-import AccountContext from "../context/AccountContext";
+// import AccountContext from "../context/AccountContext";
 
 const Recipe = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [veganOnly, setVeganOnly] = useState(false);
   const [recipeList, setRecipeList] = useState<RecipeInterface[]>([]);
-  const [currentCalories, setCurrentCalories] = useState<number>(0);
-  const [currentProtein, setCurrentProtein] = useState<number>(0);
-  const [currentCarbs, setCurrentCarbs] = useState<number>(0);
-  const [currentFats, setCurrentFats] = useState<number>(0);
+  // const [currentCalories, setCurrentCalories] = useState<number>(0);
+  // const [currentProtein, setCurrentProtein] = useState<number>(0);
+  // const [currentCarbs, setCurrentCarbs] = useState<number>(0);
+  // const [currentFats, setCurrentFats] = useState<number>(0);
 
   // const { account, addMacros } = useContext(AccountContext);
 

@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import userContext from "../context/UserContext";
 import { singInWithGoogle, singOutOfGoogle } from "../firebaseConfig";
 import AccountContext from "../context/AccountContext";
+import icon from "../assets/vegan food.png";
 
 const Header = () => {
   const { user } = useContext(userContext);
@@ -24,38 +25,51 @@ const Header = () => {
   return (
     <header className="Header">
       <section className="headerGroup1">
-        <h1>
-          <Link to="/">PlantPlate</Link>
-        </h1>
-        {user === null ? (
-          <button onClick={singInWithGoogle}>Sign In With Google</button>
-        ) : (
-          <>
-            <p>Hi, {user.displayName}</p>
+        <img src={icon} id="icon" />
+        <Link to="/" className="title">
+          <h1>Plant Plate</h1>
+        </Link>
+      </section>
+      {user === null ? (
+        <button onClick={singInWithGoogle}>Sign In With Google</button>
+      ) : (
+        <div className="user-greeting">
+          <div className="name-img">
             <img
               src={user.photoURL ?? ""}
               alt="user image"
               className="user-photo"
             />
-            <Link to="/favorites">Your favorites</Link>
-            <button onClick={singOutOfGoogle}>Sign Out</button>
-          </>
-        )}
-      </section>
+            <p className="greeting">Hi, {user.displayName}</p>
+          </div>
+          <Link to="/favorites" className="link">
+            Your favorites
+          </Link>
+          <button onClick={singOutOfGoogle}>Sign Out</button>
+        </div>
+      )}
       <section className="headingGroup2">
         <nav>
           <ul>
             <li className={hidden ? "hidden" : ""}>
-              <Link to="/tracker">Nutrition Tracker</Link>
+              <Link to="/tracker" className="link nav">
+                Nutrition Tracker
+              </Link>
             </li>
             <li className={hidden ? "hidden" : ""}>
-              <Link to="/barcode-scanner">Barcode Scanner</Link>
+              <Link to="/barcode-scanner" className="link nav">
+                Barcode Scanner
+              </Link>
             </li>
             <li>
-              <Link to="/recipes/:id">Recipes</Link>
+              <Link to="/recipes/:id" className="link nav">
+                Recipes
+              </Link>
             </li>
             <li className={hidden ? "hidden" : ""}>
-              <Link to="/goals">Goals</Link>
+              <Link to="/goals" className="link nav">
+                Goals
+              </Link>
             </li>
           </ul>
         </nav>

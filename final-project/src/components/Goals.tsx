@@ -31,7 +31,7 @@ const Goals = () => {
         +(height * 6.25 + 9.99 * weight - 4.92 * +userAge + offset).toFixed(2) *
         moderateActivityLevel
       );
-    } else if (userExercise === "active") {
+    } else {
       return (
         +(height * 6.25 + 9.99 * weight - 4.92 * +userAge + offset).toFixed(2) *
         veryActiveActivityLevel
