@@ -9,6 +9,7 @@ const Goals = () => {
   const [userAge, setUserAge] = useState<string>("");
   const [userSex, setUserSex] = useState("F");
   const [userExercise, setUserExercise] = useState("light");
+  const [userWeightGoal, setUserWeightGoal] = useState("maintain");
   const [displayError, setDisplayError] = useState(false);
   const { user } = useContext(UserContext);
   const { account, setBodyType, setCalorieGoal } = useContext(AccountContext);
@@ -21,20 +22,26 @@ const Goals = () => {
     const moderateActivityLevel = 1.55;
     const veryActiveActivityLevel = 1.725;
 
+    const weightGoalOffset: number =
+      userWeightGoal === "lose" ? -300 : userWeightGoal === "gain" ? +300 : 0;
+
     if (userExercise === "light") {
       return (
         +(height * 6.25 + 9.99 * weight - 4.92 * +userAge + offset).toFixed(2) *
-        lightActivityLevel
+          lightActivityLevel +
+        weightGoalOffset
       );
     } else if (userExercise === "moderate") {
       return (
         +(height * 6.25 + 9.99 * weight - 4.92 * +userAge + offset).toFixed(2) *
-        moderateActivityLevel
+          moderateActivityLevel +
+        weightGoalOffset
       );
     } else {
       return (
         +(height * 6.25 + 9.99 * weight - 4.92 * +userAge + offset).toFixed(2) *
-        veryActiveActivityLevel
+          veryActiveActivityLevel +
+        weightGoalOffset
       );
     }
   };
@@ -66,7 +73,7 @@ const Goals = () => {
       <p>Height: {account?.bodyType.height}</p>
       <p>Weight: {account?.bodyType.weight}</p>
       <p>Age: {account?.bodyType.age} </p>
-      <p>Sex: {account?.bodyType.sex}`</p>
+      <p>Sex: {account?.bodyType.sex}</p>
       <p>Current Calories: {account?.totalDailyCalories?.toFixed(2)}</p>
       <p>Enter your details to track nutrition goals</p>
       <form onSubmit={submitHandler}>
@@ -113,6 +120,18 @@ const Goals = () => {
           <option value="light">Light: sports 1-3 days​ a week</option>
           <option value="moderate">Moderate: sports 3-5 days​ a week</option>
           <option value="active">Active: sports 6-7 days a week</option>
+        </select>
+        <label htmlFor="weight-goal">Weith Goal:</label>
+        <select
+          name=""
+          id="weight-goal"
+          onChange={(e) => {
+            setUserWeightGoal(e.target.value);
+          }}
+        >
+          <option value="maintain">Maintain</option>
+          <option value="lose">Lose</option>
+          <option value="gain">Gain</option>
         </select>
         <button>Submit</button>
       </form>

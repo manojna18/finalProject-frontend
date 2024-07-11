@@ -54,6 +54,10 @@ const NutritionTracker = () => {
   };
   console.log(account?.meals);
 
+  // const clearAllMeals = (): void => {
+  //   account!.meals = [];
+  // };
+
   return (
     <div className="NutritionTracker">
       <>
@@ -72,6 +76,7 @@ const NutritionTracker = () => {
       <p>Fats: {account?.totalDailyFats?.toFixed(2)}</p>
 
       <p>What I ate in a day</p>
+      <button>Clear All Meals</button>
       {account?.meals.map((item) => {
         return <RecipeCard recipe={item} />;
       })}
