@@ -35,4 +35,11 @@ export default interface Recipe {
   image?: string;
   imageType?: string;
   custom?: boolean;
+  nutritionInfo?: {
+    calories: string;
+    carbs: string;
+    protein: string;
+    fats: string;
+    fiber?: string;
+  };
 }

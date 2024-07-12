@@ -8,6 +8,7 @@ import AccountContext from "../context/AccountContext";
 import { addAccount } from "../services/accountApiService";
 import userContext from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
+import CustomRecipe from "./CustomRecipe";
 
 interface Prop {
   recipe: Recipe;
@@ -76,7 +77,11 @@ const RecipeCard = ({ recipe }: Prop) => {
           />
         </label>
         <div className={detailBool ? "itemDetails" : "itemDetails hidden"}>
-          <RecipeDetail id={recipe.id} recipe={recipe} />
+          {!recipe.custom ? (
+            <RecipeDetail id={recipe.id} recipe={recipe} />
+          ) : (
+            <CustomRecipe recipe={recipe} />
+          )}
         </div>
       </div>
     </div>

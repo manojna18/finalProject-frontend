@@ -48,7 +48,7 @@ const NutritionTracker = () => {
       {
         label: "Calories",
         data: [proteinConsumedInCal, carbsConsumedInCal, fatConsumedInCal],
-        backgroundColor: ["#00FF00", "#0000FF", "#FF0000"],
+        backgroundColor: ["#50d4a5", "#bb641d", "#EDE8D0"],
       },
     ],
     borderWidth: 0.5,
@@ -59,29 +59,36 @@ const NutritionTracker = () => {
     clearAllMeals();
   };
   const [customName, setCustomName] = useState("");
-  const [customCalories, setCustomCalories] = useState(0);
-  const [customCarbs, setCustomCarbs] = useState(0);
-  const [customProtein, setCustomProtein] = useState(0);
-  const [customFat, setCustomFat] = useState(0);
+  const [customCalories, setCustomCalories] = useState("");
+  const [customCarbs, setCustomCarbs] = useState("");
+  const [customProtein, setCustomProtein] = useState("");
+  const [customFat, setCustomFat] = useState("");
 
   const addCustomMeal = (
     name: string,
-    calories: number,
-    protein: number,
-    carbs: number,
-    fat: number
+    calories: string,
+    protein: string,
+    carbs: string,
+    fat: string
   ) => {
-    addMacros(calories, protein, carbs, fat, {
+    addMacros(+calories, +protein, +carbs, +fat, {
       title: name,
       id: Math.random() * 10000,
+      custom: true,
+      nutritionInfo: {
+        calories,
+        carbs,
+        protein,
+        fats: fat,
+      },
     });
   };
   return (
     <div className="NutritionTracker">
-      <>
+      <div className="chart-holder">
         <PieChart chartData={data} />
-      </>
-      <table>
+      </div>
+      <table className="nutrition-table">
         <tr>
           <th></th>
           <th>Calories</th>
@@ -90,14 +97,14 @@ const NutritionTracker = () => {
           <th>Fats</th>
         </tr>
         <tr>
-          <td>Goals</td>
+          <td className="label">Goals</td>
           <td>{account?.calorieGoal}</td>
           <td>{proteinLimitInGrams}</td>
           <td>{carbLimitInGrams}</td>
           <td>{fatLimitInGrams}</td>
         </tr>
         <tr>
-          <td>Consumed</td>
+          <td className="label">Consumed</td>
           <td>{account?.totalDailyCalories?.toFixed(2)}</td>
           <td>{account?.totalDailyProtein?.toFixed(2)}</td>
           <td>{account?.totalDailyCarbs?.toFixed(2)}</td>
@@ -138,7 +145,7 @@ const NutritionTracker = () => {
             className="customCalories"
             value={customCalories}
             onChange={(e) => {
-              setCustomCalories(+e.target.value);
+              setCustomCalories(e.target.value);
             }}
           ></input>
         </label>
@@ -149,7 +156,7 @@ const NutritionTracker = () => {
             className="customProtein"
             value={customProtein}
             onChange={(e) => {
-              setCustomProtein(+e.target.value);
+              setCustomProtein(e.target.value);
             }}
           ></input>
         </label>
@@ -160,7 +167,7 @@ const NutritionTracker = () => {
             className="customCarbs"
             value={customCarbs}
             onChange={(e) => {
-              setCustomCarbs(+e.target.value);
+              setCustomCarbs(e.target.value);
             }}
           ></input>
         </label>
@@ -171,7 +178,7 @@ const NutritionTracker = () => {
             className="customFat"
             value={customFat}
             onChange={(e) => {
-              setCustomFat(+e.target.value);
+              setCustomFat(e.target.value);
             }}
           ></input>
         </label>

@@ -8,3 +8,32 @@
   width: 300px;
   height: 300px;
 }
+
+.NutritionTracker .nutrition-table {
+  margin-top: 80px;
+  background-color: beige;
+  border: 1px solid burlywood;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+.NutritionTracker .nutrition-table tr {
+  border: 1px solid brown;
+}
+
+.NutritionTracker .nutrition-table td {
+  border: 1px solid brown;
+  padding: 5px;
+}
+
+.NutritionTracker .nutrition-table th {
+  border-left: 1px solid beige;
+  padding: 10px;
+  background-color: #0d772b;
+  color: beige;
+  font-weight: bold;
+}
+
+.NutritionTracker .nutrition-table .label {
+  font-weight: bold;
+}
