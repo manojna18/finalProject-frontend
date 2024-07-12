@@ -26,23 +26,23 @@ const Goals = () => {
       userWeightGoal === "lose" ? -300 : userWeightGoal === "gain" ? +300 : 0;
 
     if (userExercise === "light") {
-      return (
-        +(height * 6.25 + 9.99 * weight - 4.92 * +userAge + offset).toFixed(2) *
+      return +(
+        (height * 6.25 + 9.99 * weight - 4.92 * +userAge + offset) *
           lightActivityLevel +
         weightGoalOffset
-      );
+      ).toFixed(2);
     } else if (userExercise === "moderate") {
-      return (
-        +(height * 6.25 + 9.99 * weight - 4.92 * +userAge + offset).toFixed(2) *
+      return +(
+        (height * 6.25 + 9.99 * weight - 4.92 * +userAge + offset) *
           moderateActivityLevel +
         weightGoalOffset
-      );
+      ).toFixed(2);
     } else {
-      return (
-        +(height * 6.25 + 9.99 * weight - 4.92 * +userAge + offset).toFixed(2) *
+      return +(
+        (height * 6.25 + 9.99 * weight - 4.92 * +userAge + offset) *
           veryActiveActivityLevel +
         weightGoalOffset
-      );
+      ).toFixed(2);
     }
   };
 
