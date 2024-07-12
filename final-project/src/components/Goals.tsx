@@ -9,6 +9,7 @@ const Goals = () => {
   const [userAge, setUserAge] = useState<string>("");
   const [userSex, setUserSex] = useState("F");
   const [userExercise, setUserExercise] = useState("light");
+  const [userWeightGoal, setUserWeightGoal] = useState("maintain");
   const [displayError, setDisplayError] = useState(false);
   const { user } = useContext(UserContext);
   const { account, setBodyType, setCalorieGoal } = useContext(AccountContext);
@@ -21,21 +22,27 @@ const Goals = () => {
     const moderateActivityLevel = 1.55;
     const veryActiveActivityLevel = 1.725;
 
+    const weightGoalOffset: number =
+      userWeightGoal === "lose" ? -300 : userWeightGoal === "gain" ? +300 : 0;
+
     if (userExercise === "light") {
-      return (
-        +(height * 6.25 + 9.99 * weight - 4.92 * +userAge + offset).toFixed(2) *
-        lightActivityLevel
-      );
+      return +(
+        (height * 6.25 + 9.99 * weight - 4.92 * +userAge + offset) *
+          lightActivityLevel +
+        weightGoalOffset
+      ).toFixed(2);
     } else if (userExercise === "moderate") {
-      return (
-        +(height * 6.25 + 9.99 * weight - 4.92 * +userAge + offset).toFixed(2) *
-        moderateActivityLevel
-      );
+      return +(
+        (height * 6.25 + 9.99 * weight - 4.92 * +userAge + offset) *
+          moderateActivityLevel +
+        weightGoalOffset
+      ).toFixed(2);
     } else {
-      return (
-        +(height * 6.25 + 9.99 * weight - 4.92 * +userAge + offset).toFixed(2) *
-        veryActiveActivityLevel
-      );
+      return +(
+        (height * 6.25 + 9.99 * weight - 4.92 * +userAge + offset) *
+          veryActiveActivityLevel +
+        weightGoalOffset
+      ).toFixed(2);
     }
   };
 
@@ -113,6 +120,18 @@ const Goals = () => {
           <option value="light">Light: sports 1-3 days​ a week</option>
           <option value="moderate">Moderate: sports 3-5 days​ a week</option>
           <option value="active">Active: sports 6-7 days a week</option>
+        </select>
+        <label htmlFor="weight-goal">Weith Goal:</label>
+        <select
+          name=""
+          id="weight-goal"
+          onChange={(e) => {
+            setUserWeightGoal(e.target.value);
+          }}
+        >
+          <option value="maintain">Maintain</option>
+          <option value="lose">Lose</option>
+          <option value="gain">Gain</option>
         </select>
         <button>Submit</button>
       </form>

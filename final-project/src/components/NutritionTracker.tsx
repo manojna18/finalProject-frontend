@@ -9,7 +9,7 @@ import PieChart from "./PieChart";
 Chart.register(ArcElement);
 
 const NutritionTracker = () => {
-  const { account } = useContext(AccountContext);
+  const { account, clearAllMeals } = useContext(AccountContext);
   const calorieGoal = account!.calorieGoal;
 
   //The calorie values per gram
@@ -54,24 +54,41 @@ const NutritionTracker = () => {
   };
   console.log(account?.meals);
 
+  const clearMealsHandler = (): void => {
+    clearAllMeals();
+  };
+
   return (
     <div className="NutritionTracker">
       <>
         <PieChart chartData={data} />
       </>
-      <div>
-        <p>Goals</p>
-        <p>Calorie Goal: {account?.calorieGoal}</p>
-        <p>Protein: {proteinLimitInGrams}</p>
-        <p>Carbs: {carbLimitInGrams}</p>
-        <p>Fats: {fatLimitInGrams}</p>
-      </div>
-      <p>Calories: {account?.totalDailyCalories?.toFixed(2)}</p>
-      <p>Protein: {account?.totalDailyProtein?.toFixed(2)}</p>
-      <p>Carbs: {account?.totalDailyCarbs?.toFixed(2)}</p>
-      <p>Fats: {account?.totalDailyFats?.toFixed(2)}</p>
+      <table>
+        <tr>
+          <th></th>
+          <th>Calories</th>
+          <th>Protein</th>
+          <th>Carbs</th>
+          <th>Fats</th>
+        </tr>
+        <tr>
+          <td>Goals</td>
+          <td>{account?.calorieGoal}</td>
+          <td>{proteinLimitInGrams}</td>
+          <td>{carbLimitInGrams}</td>
+          <td>{fatLimitInGrams}</td>
+        </tr>
+        <tr>
+          <td>Consumed</td>
+          <td>{account?.totalDailyCalories?.toFixed(2)}</td>
+          <td>{account?.totalDailyProtein?.toFixed(2)}</td>
+          <td>{account?.totalDailyCarbs?.toFixed(2)}</td>
+          <td>{account?.totalDailyFats?.toFixed(2)}</td>
+        </tr>
+      </table>
 
       <p>What I ate in a day</p>
+      <button onClick={clearMealsHandler}>Clear All Meals</button>
       {account?.meals.map((item) => {
         return <RecipeCard recipe={item} />;
       })}

@@ -34,22 +34,24 @@ const RecipeCard = ({ recipe }: Prop) => {
   const favoriteHandler = () => {
     if (favorite) {
       removeFavorite(recipe);
+      setFavorite(false);
     } else {
       addFavorite(recipe);
-
-      console.log();
+      setFavorite(true);
     }
-    setFavorite(!favorite);
   };
 
   useEffect(() => {
     if (!user) {
       setHidden(true);
-      navigate("/");
+      // navigate("/");
     } else {
+      setFavorite(
+        account?.favorites.find((item) => item.id === recipe.id) ? true : false
+      );
       setHidden(false);
     }
-  }, [user]);
+  }, [user, account]);
 
   return (
     <div className="RecipeCard">

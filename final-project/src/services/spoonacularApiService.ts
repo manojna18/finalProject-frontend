@@ -34,7 +34,7 @@ export const getRecipe = (
         includeIngredients: searchTerm,
         apiKey: apiRecipeKey,
         diet: isVegan ? "vegan" : "vegetarian",
-        number: 4,
+        number: 1,
       },
     })
     .then((res) => {

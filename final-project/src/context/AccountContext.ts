@@ -23,11 +23,18 @@ interface AccountContextModel {
   ): void;
   removeFavorite(recipe: Recipe): void;
   setCalorieGoal(calorieGoal: number): void;
-  setBodyType(height: number, weight: number, age: number, sex: string, calorieGoal: number): void;
+  clearAllMeals(): void;
+  setBodyType(
+    height: number,
+    weight: number,
+    age: number,
+    sex: string,
+    calorieGoal: number
+  ): void;
 }
 const defaultValues: AccountContextModel = {
   account: null,
-  updateAccount: () => {}, 
+  updateAccount: () => {},
   addMacros: () => {},
   addFavorite: () => {},
   removeFavorite: () => {},
@@ -35,6 +42,7 @@ const defaultValues: AccountContextModel = {
   setCalorieGoal: () => {},
   // addMeal: () => {},
   removeMeal: () => {},
+  clearAllMeals: () => {},
 };
 const AccountContext = createContext(defaultValues);
 export default AccountContext;

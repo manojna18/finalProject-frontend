@@ -75,7 +75,7 @@ const AccountContextProvider = ({ children }: Props) => {
     }
   };
 
-  const addMacros = (
+  const addMacros = async (
     calories: number,
     protein: number,
     carbs: number,
@@ -83,7 +83,7 @@ const AccountContextProvider = ({ children }: Props) => {
     recipe: Recipe
   ) => {
     if (account) {
-      editAccount({
+      await editAccount({
         ...account!,
         totalDailyCalories: account.totalDailyCalories + calories,
         totalDailyCarbs: account.totalDailyCarbs + carbs,
@@ -96,9 +96,15 @@ const AccountContextProvider = ({ children }: Props) => {
       console.log("No account found!");
     }
   };
-  const addFavorite = (recipe: Recipe): void => {
+  const addFavorite = async (recipe: Recipe): Promise<void> => {
+    const duplicateRecipe = account?.favorites.find((r) => {
+      return r.id === recipe.id;
+    });
+    if (duplicateRecipe) {
+      return;
+    }
     if (account) {
-      editAccount({
+      await editAccount({
         ...account,
         favorites: [...account.favorites, recipe],
       });
@@ -144,10 +150,10 @@ const AccountContextProvider = ({ children }: Props) => {
       console.log("No account found!");
     }
   };
-  const removeFavorite = (recipe: Recipe): void => {
+  const removeFavorite = async (recipe: Recipe): Promise<void> => {
     const index = account!.favorites.findIndex((r) => r.id === recipe.id);
     if (account) {
-      editAccount({
+      await editAccount({
         ...account,
         favorites: [
           ...account.favorites.slice(0, index),
@@ -159,6 +165,23 @@ const AccountContextProvider = ({ children }: Props) => {
       console.log("No account found!");
     }
   };
+
+  const clearAllMeals = async (): Promise<void> => {
+    if (account) {
+      await editAccount({
+        ...account,
+        totalDailyCalories: 0,
+        totalDailyCarbs: 0,
+        totalDailyFats: 0,
+        totalDailyProtein: 0,
+        meals: [],
+      });
+      updateAccount();
+    } else {
+      console.log("No account found");
+    }
+  };
+
   const setBodyType = async (
     height: number,
     weight: number,
@@ -175,7 +198,7 @@ const AccountContextProvider = ({ children }: Props) => {
           age,
           sex,
         },
-        calorieGoal: calorieGoal
+        calorieGoal: calorieGoal,
       });
       updateAccount();
     } else {
@@ -193,6 +216,7 @@ const AccountContextProvider = ({ children }: Props) => {
         setBodyType,
         setCalorieGoal,
         removeMeal,
+        clearAllMeals,
       }}
     >
       {children}
