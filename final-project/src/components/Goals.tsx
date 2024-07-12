@@ -66,7 +66,7 @@ const Goals = () => {
       <p>Height: {account?.bodyType.height}</p>
       <p>Weight: {account?.bodyType.weight}</p>
       <p>Age: {account?.bodyType.age} </p>
-      <p>Sex: {account?.bodyType.sex}`</p>
+      <p>Sex: {account?.bodyType.sex}</p>
       <p>Current Calories: {account?.totalDailyCalories?.toFixed(2)}</p>
       <p>Enter your details to track nutrition goals</p>
       <form onSubmit={submitHandler}>

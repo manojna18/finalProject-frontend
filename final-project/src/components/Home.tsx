@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import "./css/Home.css";
 // import Ingredient from "../models/Ingredient";
 // import { getIngredient, getRecipe } from "../services/spoonacularApiService";
