@@ -1,15 +1,16 @@
-import { useContext } from "react";
+import { FormEvent, useContext, useState } from "react";
 import "./css/NutritionTracker.css";
 import AccountContext from "../context/AccountContext";
 import RecipeCard from "./RecipeCard";
 import { Chart, ArcElement } from "chart.js/auto";
 import { CategoryScale } from "chart.js/auto";
 import PieChart from "./PieChart";
+import { FormEncType } from "react-router-dom";
 
 Chart.register(ArcElement);
 
 const NutritionTracker = () => {
-  const { account, clearAllMeals } = useContext(AccountContext);
+  const { addMacros, account, clearAllMeals } = useContext(AccountContext);
   const calorieGoal = account!.calorieGoal;
 
   //The calorie values per gram
@@ -57,7 +58,24 @@ const NutritionTracker = () => {
   const clearMealsHandler = (): void => {
     clearAllMeals();
   };
+  const [customName, setCustomName] = useState("");
+  const [customCalories, setCustomCalories] = useState(0);
+  const [customCarbs, setCustomCarbs] = useState(0);
+  const [customProtein, setCustomProtein] = useState(0);
+  const [customFat, setCustomFat] = useState(0);
 
+  const addCustomMeal = (
+    name: string,
+    calories: number,
+    protein: number,
+    carbs: number,
+    fat: number
+  ) => {
+    addMacros(calories, protein, carbs, fat, {
+      title: name,
+      id: Math.random() * 10000,
+    });
+  };
   return (
     <div className="NutritionTracker">
       <>
@@ -88,6 +106,77 @@ const NutritionTracker = () => {
       </table>
 
       <p>What I ate in a day</p>
+
+      {/* Custom meal form */}
+      <form
+        onSubmit={(e: FormEvent) => {
+          e.preventDefault();
+          addCustomMeal(
+            customName,
+            customCalories,
+            customProtein,
+            customCarbs,
+            customFat
+          );
+        }}
+      >
+        <p>Custom meal entry</p>
+        <label htmlFor="">
+          Name
+          <input
+            type="text"
+            className="customName"
+            onChange={(e) => {
+              setCustomName(e.target.value);
+            }}
+          />
+        </label>
+        <label htmlFor="">
+          Calories
+          <input
+            type="number"
+            className="customCalories"
+            value={customCalories}
+            onChange={(e) => {
+              setCustomCalories(+e.target.value);
+            }}
+          ></input>
+        </label>
+        <label htmlFor="">
+          Protein
+          <input
+            type="number"
+            className="customProtein"
+            value={customProtein}
+            onChange={(e) => {
+              setCustomProtein(+e.target.value);
+            }}
+          ></input>
+        </label>
+        <label htmlFor="">
+          Carbs
+          <input
+            type="text"
+            className="customCarbs"
+            value={customCarbs}
+            onChange={(e) => {
+              setCustomCarbs(+e.target.value);
+            }}
+          ></input>
+        </label>
+        <label htmlFor="">
+          Fat
+          <input
+            type="number"
+            className="customFat"
+            value={customFat}
+            onChange={(e) => {
+              setCustomFat(+e.target.value);
+            }}
+          ></input>
+        </label>
+        <button>Submit</button>
+      </form>
       <button onClick={clearMealsHandler}>Clear All Meals</button>
       {account?.meals.map((item) => {
         return <RecipeCard recipe={item} />;

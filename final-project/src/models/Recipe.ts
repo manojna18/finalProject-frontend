@@ -32,6 +32,7 @@
 export default interface Recipe {
   id: number;
   title: string;
-  image: string;
-  imageType: string;
+  image?: string;
+  imageType?: string;
+  custom?: boolean;
 }
