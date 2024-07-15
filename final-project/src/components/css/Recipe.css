@@ -37,11 +37,13 @@
   display: flex;
   flex-direction: column;
   padding: 20px;
-  height: fit-content;
+  height: 400px;
+  width: 400px;
   text-align: center;
   background-color: #60be97;
   border-radius: 15px;
   box-shadow: 1px 1px 1px black;
+  box-sizing: border-box;
 }
 
 .recipe h3 {
@@ -49,19 +51,19 @@
   background-color: #72230a;
   padding: 10px;
   border-radius: 15px;
-  width: fit-content;
-  margin: auto auto 20px auto;
+  /* width: fit-content; */
+  /* margin: auto auto 20px auto; */
   border: 1px solid honeydew;
 }
 
 .recipe img {
-  width: 60%;
-  height: auto;
-  margin: auto auto 20px auto;
+  width: auto;
+  height: 50%;
+  margin: 10px auto;
 }
 
 .recipe button {
-  margin: auto;
+  /* margin: auto; */
 }
 
 .recipe label {

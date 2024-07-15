@@ -9,6 +9,9 @@ import { addAccount } from "../services/accountApiService";
 import userContext from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
 import CustomRecipe from "./CustomRecipe";
+import heart_regular from "../assets/heart-regular.svg"
+import heart_solid from "../assets/heart-solid.svg"
+
 
 interface Prop {
   recipe: Recipe;
@@ -55,27 +58,33 @@ const RecipeCard = ({ recipe }: Prop) => {
   }, [user, account]);
 
   return (
-    <div className="RecipeCard">
-      <div className="recipe" key={recipe.id}>
+    <div
+      className="RecipeCard"
+      style={{ height: detailBool ? "1650px" : "400px" }}
+    >
+      <div className="recipe" key={recipe.id} style={{ height: detailBool ? "1650px" : "400px" }}>
         <h3>{recipe.title}</h3>
         <img src={recipe.image} />
-        <button
-          className="readMoreButton"
-          onClick={() => {
-            showItemDetails(recipe);
-          }}
-        >
-          Read more
-        </button>
+        <div className="recipe-options">
+          <button
+            className="readMoreButton"
+            onClick={() => {
+              showItemDetails(recipe);
+            }}
+          >
+            {!detailBool ? "Read more" : "Close"}
+          </button>
+          {favorite ? <img className="heart" src={heart_solid} onClick={favoriteHandler}/> : <img className="heart" src={heart_regular} onClick={favoriteHandler}/>}
 
-        <label htmlFor="" className={hidden ? "hidden" : ""}>
-          Favorite
-          <input
-            type="checkbox"
-            checked={favorite}
-            onChange={favoriteHandler}
-          />
-        </label>
+          {/* <label htmlFor="" className={hidden ? "hidden" : ""}>
+            Favorite
+            <input
+              type="checkbox"
+              checked={favorite}
+              onChange={favoriteHandler}
+            />
+          </label> */}
+        </div>
         <div className={detailBool ? "itemDetails" : "itemDetails hidden"}>
           {!recipe.custom ? (
             <RecipeDetail id={recipe.id} recipe={recipe} />

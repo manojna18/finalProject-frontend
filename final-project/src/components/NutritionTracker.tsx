@@ -63,6 +63,7 @@ const NutritionTracker = () => {
   const [customCarbs, setCustomCarbs] = useState("");
   const [customProtein, setCustomProtein] = useState("");
   const [customFat, setCustomFat] = useState("");
+  const [showForm, setShowForm] = useState(false);
 
   const addCustomMeal = (
     name: string,
@@ -85,37 +86,65 @@ const NutritionTracker = () => {
   };
   return (
     <div className="NutritionTracker">
-      <div className="chart-holder">
-        <PieChart chartData={data} />
+      <div className="nutrition-charts">
+        <div className="chart-holder">
+          <PieChart chartData={data} />
+        </div>
+        
+        <table className="nutrition-table">
+          <tr>
+            <th></th>
+            <th>Calories</th>
+            <th>Protein</th>
+            <th>Carbs</th>
+            <th>Fats</th>
+          </tr>
+          <tr>
+            <td className="label">Goals</td>
+            <td>{account?.calorieGoal}kcal</td>
+            <td>{proteinLimitInGrams}g</td>
+            <td>{carbLimitInGrams}g</td>
+            <td>{fatLimitInGrams}g</td>
+          </tr>
+          <tr>
+            <td className="label">Consumed</td>
+            <td>{account?.totalDailyCalories?.toFixed(2)}kcal</td>
+            <td>{account?.totalDailyProtein?.toFixed(2)}g</td>
+            <td>{account?.totalDailyCarbs?.toFixed(2)}g</td>
+            <td>{account?.totalDailyFats?.toFixed(2)}g</td>
+          </tr>
+        </table>
       </div>
-      <table className="nutrition-table">
-        <tr>
-          <th></th>
-          <th>Calories</th>
-          <th>Protein</th>
-          <th>Carbs</th>
-          <th>Fats</th>
-        </tr>
-        <tr>
-          <td className="label">Goals</td>
-          <td>{account?.calorieGoal}</td>
-          <td>{proteinLimitInGrams}</td>
-          <td>{carbLimitInGrams}</td>
-          <td>{fatLimitInGrams}</td>
-        </tr>
-        <tr>
-          <td className="label">Consumed</td>
-          <td>{account?.totalDailyCalories?.toFixed(2)}</td>
-          <td>{account?.totalDailyProtein?.toFixed(2)}</td>
-          <td>{account?.totalDailyCarbs?.toFixed(2)}</td>
-          <td>{account?.totalDailyFats?.toFixed(2)}</td>
-        </tr>
-      </table>
+      <div className="warnings">
+        {account!.totalDailyCalories > calorieGoal && (
+          <p className="warning">
+            {" "}
+            you have exceeded your calorie goal for a day
+          </p>
+        )}
+        {account!.totalDailyProtein > proteinLimitInGrams && (
+          <p className="warning">
+            you have exceeded recommended protein amount for a day
+          </p>
+        )}
+        {account!.totalDailyCarbs > carbLimitInGrams && (
+          <p className="warning">
+            you have exceeded recommended carbs amount for a day
+          </p>
+        )}
+        {account!.totalDailyFats > fatLimitInGrams && (
+          <p className="warning">
+            you have exceeded recommended fats amount for a day
+          </p>
+        )}
+      </div>
 
-      <p>What I ate in a day</p>
+      {/* <p>What I ate in a day</p> */}
 
       {/* Custom meal form */}
+      <button onClick={() => {setShowForm(!showForm)}}>{showForm ? "Hide form" : "Add custom meal"}</button>
       <form
+        style={{display: showForm ? "flex" : "none"}}
         onSubmit={(e: FormEvent) => {
           e.preventDefault();
           addCustomMeal(
@@ -127,7 +156,7 @@ const NutritionTracker = () => {
           );
         }}
       >
-        <p>Custom meal entry</p>
+        <h3>Custom meal entry</h3>
         <label htmlFor="">
           Name
           <input
@@ -185,31 +214,13 @@ const NutritionTracker = () => {
         <button>Submit</button>
       </form>
       <button onClick={clearMealsHandler}>Clear All Meals</button>
-      {account?.meals.map((item) => {
+      <div className="plate">
+        {account?.meals.map((item) => {
         return <RecipeCard recipe={item} />;
       })}
+      </div>
 
-      {account!.totalDailyCalories > calorieGoal && (
-        <p className="warning">
-          {" "}
-          you have exceeded your calorie goal for a day
-        </p>
-      )}
-      {account!.totalDailyProtein > proteinLimitInGrams && (
-        <p className="warning">
-          you have exceeded recommended protein amount for a day
-        </p>
-      )}
-      {account!.totalDailyCarbs > carbLimitInGrams && (
-        <p className="warning">
-          you have exceeded recommended carbs amount for a day
-        </p>
-      )}
-      {account!.totalDailyFats > fatLimitInGrams && (
-        <p className="warning">
-          you have exceeded recommended fats amount for a day
-        </p>
-      )}
+      
     </div>
   );
 };

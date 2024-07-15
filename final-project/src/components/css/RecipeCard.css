@@ -5,6 +5,31 @@
 .RecipeCard {
   display: flex;
   flex-direction: column;
-  height: fit-content;
-  padding: 20px;
+  margin: 10px;
+  box-sizing: border-box;
+}
+
+.RecipeCard .heart {
+  height: 30px;
+  margin: 10px;
+}
+
+.RecipeCard .recipe-options {
+  display: flex;
+  /* flex: 2; */
+  align-items: center;
+  justify-content: space-around;
+}
+/* .RecipeCard img {
+  flex: 4;
+}
+.RecipeCard h3 {
+  flex: 1;
+} */
+
+@media screen and (width > 768px)  {
+  .RecipeCard {
+
+  }
+  
 }
