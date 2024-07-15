@@ -47,29 +47,31 @@ const Header = () => {
           <Link to="/favorites" className="link">
             Your favorites
           </Link>
-          <button onClick={singOutOfGoogle}>Sign Out</button>
+          <button onClick={singOutOfGoogle} className="signOut">
+            Sign Out
+          </button>
         </div>
       )}
       <section className="headingGroup2">
         <nav>
           <ul>
             <li className={hidden ? "hidden" : ""}>
-              <Link to="/tracker" className="link nav">
+              <Link to="/tracker" className="nav-link">
                 Nutrition Tracker
               </Link>
             </li>
             <li className={hidden ? "hidden" : ""}>
-              <Link to="/barcode-scanner" className="link nav">
+              <Link to="/barcode-scanner" className="nav-link">
                 Barcode Scanner
               </Link>
             </li>
             <li>
-              <Link to="/recipes" className="link nav">
+              <Link to="/recipes" className="nav-link">
                 Recipes
               </Link>
             </li>
             <li className={hidden ? "hidden" : ""}>
-              <Link to="/goals" className="link nav">
+              <Link to="/goals" className="nav-link">
                 Goals
               </Link>
             </li>

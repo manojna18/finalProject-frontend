@@ -7,16 +7,17 @@
 .home-img {
   width: auto;
   padding: 50px;
-  height: 200px;
+  height: 170px;
   margin-left: auto;
   margin-right: auto;
   z-index: 1;
 }
 
-.Home h1 {
+.Home h2 {
   padding: 30px;
   text-align: center;
   color: #72230a;
+  font-size: 35px;
 }
 .Home h3 {
   text-align: center;
@@ -39,4 +40,10 @@
   width: fit-content;
   border-radius: 50%;
   margin: 100px auto 10px auto;
+}
+
+@media screen and (min-width: 768px) {
+  .home-img {
+    height: 200px;
+  }
 }
