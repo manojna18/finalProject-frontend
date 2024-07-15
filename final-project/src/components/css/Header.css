@@ -84,4 +84,27 @@ ul {
 }
 
 @media screen and (width > 768px) {
+  .user-greeting {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 500px;
+  }
+  .Header {
+    height: auto;
+  }
+  .greeting {
+    transform: translate(-15px, 15px);
+  }
+
+  .name-img {
+    display: flex;
+    flex-direction: row;
+    width: 300px;
+  }
+  .signIn {
+    margin-left: 10px;
+    transform: translate(0, 5px);
+  }
 }

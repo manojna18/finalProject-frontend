@@ -31,7 +31,9 @@ const Header = () => {
         </Link>
       </section>
       {user === null ? (
-        <button onClick={singInWithGoogle}>Sign In With Google</button>
+        <button className="signIn" onClick={singInWithGoogle}>
+          Sign In With Google
+        </button>
       ) : (
         <div className="user-greeting">
           <div className="name-img">
