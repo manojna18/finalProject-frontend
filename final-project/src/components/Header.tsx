@@ -24,12 +24,36 @@ const Header = () => {
 
   return (
     <header className="Header">
-      <section className="headerGroup1">
-        <img src={icon} id="icon" />
-        <Link to="/" className="title">
-          <h1>Plant Plate</h1>
-        </Link>
-      </section>
+      <div className="title-links">
+        <section className="headerGroup1">
+          <img src={icon} id="icon" />
+          <Link to="/" className="title">
+            <h1>Plant Plate</h1>
+          </Link>
+        </section>
+        <section className="headingGroup2">
+          <nav>
+            <ul>
+              <li className={hidden ? "hidden" : ""}>
+                <Link to="/tracker" className="nav-link">
+                  Nutrition Tracker
+                </Link>
+              </li>
+              <li>
+                <Link to="/recipes" className="nav-link">
+                  Recipes
+                </Link>
+              </li>
+              <li className={hidden ? "hidden" : ""}>
+                <Link to="/goals" className="nav-link">
+                  Goals
+                </Link>
+              </li>
+            </ul>
+          </nav>
+        </section>
+      </div>
+
       {user === null ? (
         <button className="signIn" onClick={singInWithGoogle}>
           Sign In With Google
@@ -52,32 +76,6 @@ const Header = () => {
           </button>
         </div>
       )}
-      <section className="headingGroup2">
-        <nav>
-          <ul>
-            <li className={hidden ? "hidden" : ""}>
-              <Link to="/tracker" className="nav-link">
-                Nutrition Tracker
-              </Link>
-            </li>
-            <li className={hidden ? "hidden" : ""}>
-              <Link to="/barcode-scanner" className="nav-link">
-                Barcode Scanner
-              </Link>
-            </li>
-            <li>
-              <Link to="/recipes" className="nav-link">
-                Recipes
-              </Link>
-            </li>
-            <li className={hidden ? "hidden" : ""}>
-              <Link to="/goals" className="nav-link">
-                Goals
-              </Link>
-            </li>
-          </ul>
-        </nav>
-      </section>
     </header>
   );
 };

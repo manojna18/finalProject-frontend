@@ -1,3 +1,10 @@
 .Recipe-card .hidden {
   display: none;
 }
+
+.RecipeCard {
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  padding: 20px;
+}

@@ -1,3 +1,69 @@
 .Recipe {
   padding: 20px;
 }
+
+#search-form {
+  display: flex;
+  flex-direction: column;
+}
+
+#search-form label {
+  width: 50%;
+  margin: auto 0;
+  margin-bottom: 20px;
+}
+
+#search-form input {
+  width: 50%;
+  padding: 1.5%;
+  margin-bottom: 10px;
+}
+
+#search-form #veg {
+  width: fit-content;
+  margin-left: 10px;
+  margin-top: 5px;
+  padding: 1%;
+}
+
+.recipes-container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  height: fit-content;
+}
+
+.recipe {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  height: fit-content;
+  text-align: center;
+  background-color: #60be97;
+  border-radius: 15px;
+  box-shadow: 1px 1px 1px black;
+}
+
+.recipe h3 {
+  color: rgb(213, 250, 213);
+  background-color: #72230a;
+  padding: 10px;
+  border-radius: 15px;
+  width: fit-content;
+  margin: auto auto 20px auto;
+  border: 1px solid honeydew;
+}
+
+.recipe img {
+  width: 60%;
+  height: auto;
+  margin: auto auto 20px auto;
+}
+
+.recipe button {
+  margin: auto;
+}
+
+.recipe label {
+  margin: 20px;
+}

@@ -1,3 +1,39 @@
 .hidden {
   display: none;
 }
+
+.RecipeDetail {
+  background-color: honeydew;
+  padding: 20px;
+}
+
+.recipe-deets {
+  font-weight: bold;
+  margin: 10px;
+}
+
+.RecipeDetail a {
+  text-decoration: none;
+  color: rgb(38, 61, 25);
+  font-weight: bold;
+  background-color: rgb(243, 231, 136);
+}
+
+.RecipeDetail .excerpt {
+  margin: 10px;
+  line-height: 30px;
+}
+
+.nutrient-info .RemoveFromPlateBtn {
+  margin: 10px;
+}
+
+.nutrient-info {
+  background-color: #72230a;
+  color: rgb(201, 245, 201);
+  padding: 20px;
+}
+
+.nutrient-info p {
+  margin: 10px;
+}

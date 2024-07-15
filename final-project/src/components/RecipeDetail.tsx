@@ -47,16 +47,22 @@ const RecipeDetail = ({ id, recipe }: Props) => {
   return (
     <>
       <div className="RecipeDetail">
-        <p>Time to cook: {details?.readyInMinutes}</p>
-        <p>Number of servings: {details?.servings} </p>
-        <p></p>
-        <a href={details?.sourceUrl} target="_blank" rel="noopener noreferrer">
+        <p className="recipe-deets">Time to cook: {details?.readyInMinutes}</p>
+        <p className="recipe-deets">Number of servings: {details?.servings} </p>
+        <a
+          href={details?.sourceUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="link"
+        >
           Link to the recipe
         </a>
         {details && (
-          <p dangerouslySetInnerHTML={{ __html: details.summary }}></p>
+          <p
+            dangerouslySetInnerHTML={{ __html: details.summary }}
+            className="excerpt"
+          ></p>
         )}
-        <p></p>
       </div>
       <div className="nutrient-info">
         <h4>Macros</h4>

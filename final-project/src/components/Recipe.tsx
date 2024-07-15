@@ -38,12 +38,15 @@ const Recipe = () => {
             setSearchTerm(e.target.value);
           }}
         />
-        <label htmlFor="veg">Only show vegan recipes</label>
-        <input
-          type="checkbox"
-          id="veg"
-          onClick={() => setVeganOnly(!veganOnly)}
-        />
+        <label htmlFor="veg">
+          Only show vegan recipes
+          <input
+            type="checkbox"
+            id="veg"
+            onClick={() => setVeganOnly(!veganOnly)}
+          />
+        </label>
+
         <button type="submit">Get Recipes</button>
       </form>
       <div className="recipes-container">

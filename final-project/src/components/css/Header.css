@@ -1,4 +1,4 @@
-.Header {
+Header {
   padding: 5px;
   margin: 0;
   display: flex;
@@ -6,31 +6,37 @@
   padding: 10px;
   justify-content: space-between;
 }
-
 .Header h1 {
   color: #f8d9b1;
   font-size: 35px;
   text-shadow: 1px 2px 1px black;
 }
-
 .Header nav li {
   text-indent: 0;
 }
-
 .Header a {
   color: #f8d9b1;
+}
+
+.title-links {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 60%;
+}
+
+.headingGroup2 {
+  margin: auto 0;
 }
 
 .headingGroup2 ul {
   display: flex;
   flex-direction: column;
-  text-align: right;
+  text-align: center;
 }
-
 .headingGroup2 li {
   padding: 5px 0;
 }
-
 .user-greeting {
   display: flex;
   flex-direction: column;
@@ -38,53 +44,43 @@
   text-align: center;
   align-items: center;
 }
-
 .user-greeting img {
   width: 60px;
   height: 60px;
 }
-
 .user-greeting button {
   padding: 0px;
   font-weight: bold;
   font-size: 15px;
   width: 140px;
 }
-
 .user-greeting button:hover {
   background-color: #f8d9b1;
   color: #72230a;
 }
-
 .greeting {
   color: #f8d9b1;
   margin-bottom: 5px;
 }
-
 .name-img {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   width: 150px;
 }
-
 .name-img img {
   margin: 10px auto 10px auto;
 }
-
 .headerGroup1 {
   text-align: left;
 }
-
 #icon {
   width: 100px;
   height: 100px;
 }
-
 .user-photo {
   border-radius: 50%;
 }
-
 .signIn,
 .signOut {
   margin-top: 10px;
@@ -93,15 +89,17 @@
 @media screen and (width > 768px) {
   .user-greeting {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-evenly;
-    width: 90%;
+    width: fit-content;
     margin: 0;
+    position: absolute;
+    right: 2%;
+    top: 2%;
   }
 
   .Header {
-    height: auto;
+    height: 200px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -109,32 +107,15 @@
   }
 
   .greeting {
-    transform: translate(-15px, 15px);
-    margin: auto 0;
+    margin: auto 0 10px;
   }
 
   .name-img {
     display: flex;
-    flex-direction: row;
-    width: 300px;
-  }
-
-  ul {
-    display: flex;
-    flex-direction: row;
-    padding-left: 0;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  li {
-    text-align: right;
-    padding: 0;
-    margin: 0;
-  }
-
-  .nav-link {
-    margin: 0 20px;
+    flex-direction: column;
+    width: fit-content;
+    text-align: center;
+    justify-content: center;
   }
 
   .signIn {
@@ -148,11 +129,27 @@
     justify-content: center;
   }
 
-  .headerGroup1 {
+  .title-links {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-around;
+    width: 65%;
+    text-align: center;
+    margin-right: auto;
+  }
+
+  .headerGroup1 {
+    display: flex;
+    flex-direction: column;
+    margin-right: auto;
     align-items: center;
+  }
+
+  .headingGroup2 {
+    display: flex;
+    margin: auto 0;
+    padding: 0 20px 0 30px;
+    font-size: larger;
   }
 
   .headingGroup2 ul {
@@ -160,5 +157,6 @@
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
+    width: 300px;
   }
 }
