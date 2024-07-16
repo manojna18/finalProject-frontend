@@ -5,6 +5,8 @@ import AccountContext from "../context/AccountContext";
 
 const Goals = () => {
   const [userHeight, setUserHeight] = useState<string>("");
+  const [userHeightLargerUnit, setUserHeightLargerUnit] = useState<string>("");
+  const [isImperial, setIsImperial] = useState(false);
   const [userWeight, setUserWeight] = useState<string>("");
   const [userAge, setUserAge] = useState<string>("");
   const [userSex, setUserSex] = useState("F");
@@ -49,6 +51,13 @@ const Goals = () => {
   const submitHandler = async (e: FormEvent) => {
     e.preventDefault();
     let height: number = +userHeight;
+    if (isImperial) {
+      height = +userHeightLargerUnit * 12 + +userHeight;
+    }
+    if (!isImperial) {
+      height = +userHeightLargerUnit * 100 + +userHeight;
+    }
+    console.log(height);
     let weight: number = +userWeight;
     let age: number = +userAge;
     if (height && weight && age) {
@@ -91,16 +100,62 @@ const Goals = () => {
         {account?.totalDailyCalories?.toFixed(2)}
       </p>
       <h3>Enter your details to track nutrition goals</h3>
+
       <form onSubmit={submitHandler}>
-        <label htmlFor="height">Height (in inch):</label>
+        <label>
+          Metric
+          <input
+            type="radio"
+            name="measurement"
+            value="metric"
+            onClick={() => {
+              setIsImperial(false);
+            }}
+          ></input>
+        </label>
+        <label>
+          Imperial
+          <input
+            type="radio"
+            name="measurement"
+            value="imperial"
+            onClick={() => {
+              setIsImperial(true);
+            }}
+          ></input>
+        </label>
+
+        {isImperial ? (
+          <label htmlFor="heightLarge">Height ft:</label>
+        ) : (
+          <label htmlFor="heightLarge">Height in Meters </label>
+        )}
         <input
+          required
+          type="text"
+          id="heightLarge"
+          value={userHeightLargerUnit}
+          onChange={(e) => setUserHeightLargerUnit(e.target.value)}
+        />
+        {isImperial ? (
+          <label htmlFor="height">in:</label>
+        ) : (
+          <label htmlFor="height">cm:</label>
+        )}
+        <input
+          required
           type="text"
           id="height"
           value={userHeight}
           onChange={(e) => setUserHeight(e.target.value)}
         />
-        <label htmlFor="weight">Weight (in pounds):</label>
+        {isImperial ? (
+          <label htmlFor="weight">Weight (in pounds):</label>
+        ) : (
+          <label htmlFor="weight">Weight (in kilograms):</label>
+        )}
         <input
+          required
           type="text"
           id="weight"
           value={userWeight}
@@ -108,6 +163,7 @@ const Goals = () => {
         />
         <label htmlFor="age">Age:</label>
         <input
+          required
           type="text"
           id="age"
           value={userAge}
