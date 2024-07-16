@@ -5,6 +5,8 @@ import AccountContext from "../context/AccountContext";
 
 const Goals = () => {
   const [userHeight, setUserHeight] = useState<string>("");
+  const [userHeightSmallerUnit, setUserHeightSmallerUnit] =
+    useState<string>("");
   const [userHeightLargerUnit, setUserHeightLargerUnit] = useState<string>("");
   const [isImperial, setIsImperial] = useState(false);
   const [userWeight, setUserWeight] = useState<string>("");
@@ -18,50 +20,63 @@ const Goals = () => {
 
   const calculateCalorieGoal = (): number => {
     const offset: number = userSex === "F" ? -161 : 5;
-    let height = +userHeight * 2.54;
-    let weight = +userWeight / 2.205;
+    let height = 0;
+    let weight = +userWeight;
     const lightActivityLevel = 1.375;
     const moderateActivityLevel = 1.55;
     const veryActiveActivityLevel = 1.725;
+    if (isImperial) {
+      console.log(userHeight);
+      height = +userHeightLargerUnit * 12 + +userHeightSmallerUnit;
+    } else {
+      height = +userHeightLargerUnit * 100 + +userHeightSmallerUnit;
+    }
+    let bmr = 0;
+    if (isImperial) {
+      height = height * 2.54;
+      weight = +userWeight * 0.453582;
+    }
+
+    if (userSex === "M") {
+      bmr = 13.397 * weight + 4.799 * height - 5.677 * +userAge + 88.362;
+      console.log("H: " + height + " W: " + weight);
+    } else if (userSex === "F") {
+      bmr = 447.593 + 9.247 * +weight + 3.098 * +height - 4.33 * +userAge;
+    }
+
+    console.log(bmr);
 
     const weightGoalOffset: number =
       userWeightGoal === "lose" ? -300 : userWeightGoal === "gain" ? +300 : 0;
 
     if (userExercise === "light") {
-      return +(
-        (height * 6.25 + 9.99 * weight - 4.92 * +userAge + offset) *
-          lightActivityLevel +
-        weightGoalOffset
-      ).toFixed(2);
+      return +(bmr * lightActivityLevel + weightGoalOffset).toFixed(2);
     } else if (userExercise === "moderate") {
-      return +(
-        (height * 6.25 + 9.99 * weight - 4.92 * +userAge + offset) *
-          moderateActivityLevel +
-        weightGoalOffset
-      ).toFixed(2);
+      return +(bmr * moderateActivityLevel + weightGoalOffset).toFixed(2);
     } else {
-      return +(
-        (height * 6.25 + 9.99 * weight - 4.92 * +userAge + offset) *
-          veryActiveActivityLevel +
-        weightGoalOffset
-      ).toFixed(2);
+      return +(bmr * veryActiveActivityLevel + weightGoalOffset).toFixed(2);
     }
   };
 
   const submitHandler = async (e: FormEvent) => {
     e.preventDefault();
-    let height: number = +userHeight;
+    let height: string = "";
     if (isImperial) {
-      height = +userHeightLargerUnit * 12 + +userHeight;
+      console.log(userHeight);
+      height = (+userHeightLargerUnit * 12 + +userHeightSmallerUnit).toString();
+    } else {
+      height = (
+        +userHeightLargerUnit * 100 +
+        +userHeightSmallerUnit
+      ).toString();
     }
-    if (!isImperial) {
-      height = +userHeightLargerUnit * 100 + +userHeight;
-    }
+    console.log(userHeight);
+    setUserHeight(height);
     console.log(height);
     let weight: number = +userWeight;
     let age: number = +userAge;
     if (height && weight && age) {
-      await setBodyType(height, weight, age, userSex, calculateCalorieGoal());
+      await setBodyType(+height, weight, age, userSex, calculateCalorieGoal());
       //setCalorieGoal(calculateCalorieGoal());
       //ProteinGoal = weight(in pounds) * 0.36
       //CarbGoal = .45 * calorieGoal
@@ -75,6 +90,7 @@ const Goals = () => {
     setUserAge("");
   };
 
+  console.log(userHeight);
   return (
     <div className="Goals">
       <h2>Your Calorie Goal: {account?.calorieGoal}</h2>
@@ -146,8 +162,8 @@ const Goals = () => {
           required
           type="text"
           id="height"
-          value={userHeight}
-          onChange={(e) => setUserHeight(e.target.value)}
+          value={userHeightSmallerUnit}
+          onChange={(e) => setUserHeightSmallerUnit(e.target.value)}
         />
         {isImperial ? (
           <label htmlFor="weight">Weight (in pounds):</label>
