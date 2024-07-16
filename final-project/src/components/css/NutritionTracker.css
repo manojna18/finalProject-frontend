@@ -8,28 +8,26 @@
   align-items: center;
   justify-content: space-between;
   text-align: center;
-
 }
 .PieChart {
   width: 300px;
   height: 350px;
   box-sizing: border-box;
-
 }
+
 .chart-holder {
   width: 300px;
   height: 400px;
   box-sizing: border-box;
-  /* position: relative; */
 }
 
 .NutritionTracker .nutrition-table {
-  /* margin-top: 80px; */
   margin: 20px 0;
   background-color: beige;
   border: 1px solid burlywood;
   border-collapse: collapse;
   text-align: center;
+  font-size: 15px;
 }
 
 .NutritionTracker .nutrition-table tr {
@@ -41,7 +39,7 @@
 
 .NutritionTracker .nutrition-table td {
   /* border: 1px solid brown; */
-  padding: 20px 10px;
+  padding: 20px 5px;
 }
 .NutritionTracker .nutrition-table td:hover {
   background-color: burlywood;

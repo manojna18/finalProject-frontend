@@ -1,3 +1,42 @@
 .Goals .error-message {
-    color: red;
+  color: red;
+}
+
+.Goals {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding-bottom: 50px;
+}
+
+.Goals form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 380px;
+}
+
+.Goals label {
+  font-weight: bold;
+}
+
+.Goals input,
+select {
+  margin: 10px 0;
+  padding: 10px;
+  width: 250px;
+  border-radius: 10px;
+  border: 1px rgba(128, 128, 128, 0.5) solid;
+}
+
+.Goals select {
+  width: 275px;
+}
+
+.Goals button {
+  width: 100px;
+}
+
+.Goals h3 {
+  margin: 20px 0;
 }

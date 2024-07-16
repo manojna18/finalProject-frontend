@@ -12,24 +12,19 @@
 .RecipeCard .heart {
   height: 30px;
   margin: 10px;
+  width: 35px;
+  transition: transform 0.2s;
 }
 
 .RecipeCard .recipe-options {
   display: flex;
-  /* flex: 2; */
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
 }
-/* .RecipeCard img {
-  flex: 4;
+
+.heart:hover {
+  transform: scale(1.1);
 }
-.RecipeCard h3 {
-  flex: 1;
-} */
 
-@media screen and (width > 768px)  {
-  .RecipeCard {
-
-  }
-  
+@media screen and (width > 768px) {
 }

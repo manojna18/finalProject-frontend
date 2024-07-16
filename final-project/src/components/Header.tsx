@@ -16,7 +16,7 @@ const Header = () => {
     updateAccount();
     if (!user) {
       setHidden(true);
-      // navigate("/");
+      navigate("/");
     } else {
       setHidden(false);
     }

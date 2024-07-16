@@ -68,14 +68,29 @@ const Goals = () => {
 
   return (
     <div className="Goals">
-      <h2>Goals</h2>
-      <p>Calorie Goal: {account?.calorieGoal}</p>
-      <p>Height: {account?.bodyType.height}</p>
-      <p>Weight: {account?.bodyType.weight}</p>
-      <p>Age: {account?.bodyType.age} </p>
-      <p>Sex: {account?.bodyType.sex}</p>
-      <p>Current Calories: {account?.totalDailyCalories?.toFixed(2)}</p>
-      <p>Enter your details to track nutrition goals</p>
+      <h2>Your Calorie Goal: {account?.calorieGoal}</h2>
+      <p>
+        {" "}
+        <strong>Height:</strong> {account?.bodyType.height}
+      </p>
+      <p>
+        {" "}
+        <strong>Weight:</strong> {account?.bodyType.weight}
+      </p>
+      <p>
+        {" "}
+        <strong>Age:</strong> {account?.bodyType.age}{" "}
+      </p>
+      <p>
+        {" "}
+        <strong>Sex:</strong> {account?.bodyType.sex}
+      </p>
+      <p>
+        {" "}
+        <strong>Current Calories:</strong>{" "}
+        {account?.totalDailyCalories?.toFixed(2)}
+      </p>
+      <h3>Enter your details to track nutrition goals</h3>
       <form onSubmit={submitHandler}>
         <label htmlFor="height">Height (in inch):</label>
         <input

@@ -11,6 +11,12 @@ Chart.register(ArcElement);
 
 const NutritionTracker = () => {
   const { addMacros, account, clearAllMeals } = useContext(AccountContext);
+  const [customName, setCustomName] = useState("");
+  const [customCalories, setCustomCalories] = useState("");
+  const [customCarbs, setCustomCarbs] = useState("");
+  const [customProtein, setCustomProtein] = useState("");
+  const [customFat, setCustomFat] = useState("");
+  const [showForm, setShowForm] = useState(false);
   const calorieGoal = account!.calorieGoal;
 
   //The calorie values per gram
@@ -58,12 +64,6 @@ const NutritionTracker = () => {
   const clearMealsHandler = (): void => {
     clearAllMeals();
   };
-  const [customName, setCustomName] = useState("");
-  const [customCalories, setCustomCalories] = useState("");
-  const [customCarbs, setCustomCarbs] = useState("");
-  const [customProtein, setCustomProtein] = useState("");
-  const [customFat, setCustomFat] = useState("");
-  const [showForm, setShowForm] = useState(false);
 
   const addCustomMeal = (
     name: string,
@@ -90,7 +90,7 @@ const NutritionTracker = () => {
         <div className="chart-holder">
           <PieChart chartData={data} />
         </div>
-        
+
         <table className="nutrition-table">
           <tr>
             <th></th>
@@ -138,13 +138,15 @@ const NutritionTracker = () => {
           </p>
         )}
       </div>
-
-      {/* <p>What I ate in a day</p> */}
-
-      {/* Custom meal form */}
-      <button onClick={() => {setShowForm(!showForm)}}>{showForm ? "Hide form" : "Add custom meal"}</button>
+      <button
+        onClick={() => {
+          setShowForm(!showForm);
+        }}
+      >
+        {showForm ? "Hide form" : "Add custom meal"}
+      </button>
       <form
-        style={{display: showForm ? "flex" : "none"}}
+        style={{ display: showForm ? "flex" : "none" }}
         onSubmit={(e: FormEvent) => {
           e.preventDefault();
           addCustomMeal(
@@ -216,11 +218,9 @@ const NutritionTracker = () => {
       <button onClick={clearMealsHandler}>Clear All Meals</button>
       <div className="plate">
         {account?.meals.map((item) => {
-        return <RecipeCard recipe={item} />;
-      })}
+          return <RecipeCard key={item.id} recipe={item} />;
+        })}
       </div>
-
-      
     </div>
   );
 };

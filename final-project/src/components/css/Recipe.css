@@ -37,8 +37,8 @@
   display: flex;
   flex-direction: column;
   padding: 20px;
-  height: 400px;
-  width: 400px;
+  height: auto;
+  width: 350px;
   text-align: center;
   background-color: #60be97;
   border-radius: 15px;
@@ -51,19 +51,12 @@
   background-color: #72230a;
   padding: 10px;
   border-radius: 15px;
-  /* width: fit-content; */
-  /* margin: auto auto 20px auto; */
   border: 1px solid honeydew;
 }
 
 .recipe img {
-  width: auto;
-  height: 50%;
   margin: 10px auto;
-}
-
-.recipe button {
-  /* margin: auto; */
+  width: 300px;
 }
 
 .recipe label {
