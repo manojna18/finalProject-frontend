@@ -3,9 +3,7 @@ import "./css/NutritionTracker.css";
 import AccountContext from "../context/AccountContext";
 import RecipeCard from "./RecipeCard";
 import { Chart, ArcElement } from "chart.js/auto";
-import { CategoryScale } from "chart.js/auto";
 import PieChart from "./PieChart";
-import { FormEncType } from "react-router-dom";
 
 Chart.register(ArcElement);
 
@@ -101,17 +99,17 @@ const NutritionTracker = () => {
           </tr>
           <tr>
             <td className="label">Goals</td>
-            <td>{account?.calorieGoal}kcal</td>
-            <td>{proteinLimitInGrams}g</td>
-            <td>{carbLimitInGrams}g</td>
-            <td>{fatLimitInGrams}g</td>
+            <td>{account?.calorieGoal} kcal</td>
+            <td>{proteinLimitInGrams} g</td>
+            <td>{carbLimitInGrams} g</td>
+            <td>{fatLimitInGrams} g</td>
           </tr>
           <tr>
             <td className="label">Consumed</td>
-            <td>{account?.totalDailyCalories?.toFixed(2)}kcal</td>
-            <td>{account?.totalDailyProtein?.toFixed(2)}g</td>
-            <td>{account?.totalDailyCarbs?.toFixed(2)}g</td>
-            <td>{account?.totalDailyFats?.toFixed(2)}g</td>
+            <td>{account?.totalDailyCalories?.toFixed(2)} kcal</td>
+            <td>{account?.totalDailyProtein?.toFixed(2)} g</td>
+            <td>{account?.totalDailyCarbs?.toFixed(2)} g</td>
+            <td>{account?.totalDailyFats?.toFixed(2)} g</td>
           </tr>
         </table>
       </div>

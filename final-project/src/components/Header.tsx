@@ -39,7 +39,7 @@ const Header = () => {
                   Nutrition Tracker
                 </Link>
               </li>
-              <li>
+              <li className={hidden ? "hidden" : ""}>
                 <Link to="/recipes" className="nav-link">
                   Recipes
                 </Link>

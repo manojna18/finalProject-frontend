@@ -103,7 +103,28 @@ Header {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: center;
+  }
+
+  .title-links {
+    width: 100vw;
+    margin: auto;
+  }
+
+  .headerGroup2 {
+    display: none;
+    width: 0;
+  }
+
+  .headerGroup2 nav ul {
+    display: none;
+    width: 0;
+  }
+
+  .headerGroup1 {
+    text-align: center;
+    margin: auto;
+    width: 100vw;
   }
 
   .greeting {
@@ -119,8 +140,8 @@ Header {
   }
 
   .signIn {
-    margin: 0px;
-    padding: 0;
+    margin: 10px;
+    padding: 10px;
     transform: translate(0, 5px);
   }
 
@@ -145,7 +166,7 @@ Header {
     align-items: center;
   }
 
-  .headingGroup2 {
+  /* .headingGroup2 {
     display: flex;
     margin: auto 0;
     padding: 0 20px 0 30px;
@@ -158,5 +179,5 @@ Header {
     justify-content: space-evenly;
     align-items: center;
     width: 300px;
-  }
+  } */
 }

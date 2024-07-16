@@ -9,9 +9,8 @@ import { addAccount } from "../services/accountApiService";
 import userContext from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
 import CustomRecipe from "./CustomRecipe";
-import heart_regular from "../assets/heart-regular.svg"
-import heart_solid from "../assets/heart-solid.svg"
-
+import heart_regular from "../assets/heart-regular.svg";
+import heart_solid from "../assets/heart-solid.svg";
 
 interface Prop {
   recipe: Recipe;
@@ -60,9 +59,13 @@ const RecipeCard = ({ recipe }: Prop) => {
   return (
     <div
       className="RecipeCard"
-      style={{ height: detailBool ? "1650px" : "400px" }}
+      style={{ height: detailBool ? "1400px" : "400px" }}
     >
-      <div className="recipe" key={recipe.id} style={{ height: detailBool ? "1650px" : "400px" }}>
+      <div
+        className="recipe"
+        key={recipe.id}
+        style={{ height: detailBool ? "1500px" : "450px" }}
+      >
         <h3>{recipe.title}</h3>
         <img src={recipe.image} />
         <div className="recipe-options">
@@ -74,7 +77,19 @@ const RecipeCard = ({ recipe }: Prop) => {
           >
             {!detailBool ? "Read more" : "Close"}
           </button>
-          {favorite ? <img className="heart" src={heart_solid} onClick={favoriteHandler}/> : <img className="heart" src={heart_regular} onClick={favoriteHandler}/>}
+          {favorite ? (
+            <img
+              className="heart"
+              src={heart_solid}
+              onClick={favoriteHandler}
+            />
+          ) : (
+            <img
+              className="heart"
+              src={heart_regular}
+              onClick={favoriteHandler}
+            />
+          )}
 
           {/* <label htmlFor="" className={hidden ? "hidden" : ""}>
             Favorite

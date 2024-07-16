@@ -1,6 +1,5 @@
 import "./css/Goals.css";
-import UserContext from "../context/UserContext";
-import { FormEvent, useContext, useEffect, useState } from "react";
+import { FormEvent, useContext, useState } from "react";
 import AccountContext from "../context/AccountContext";
 
 const Goals = () => {
@@ -15,11 +14,10 @@ const Goals = () => {
   const [userExercise, setUserExercise] = useState("light");
   const [userWeightGoal, setUserWeightGoal] = useState("maintain");
   const [displayError, setDisplayError] = useState(false);
-  const { user } = useContext(UserContext);
+  // const { user } = useContext(UserContext);
   const { account, setBodyType, setCalorieGoal } = useContext(AccountContext);
 
   const calculateCalorieGoal = (): number => {
-    const offset: number = userSex === "F" ? -161 : 5;
     let height = 0;
     let weight = +userWeight;
     const lightActivityLevel = 1.375;
@@ -93,58 +91,71 @@ const Goals = () => {
   console.log(userHeight);
   return (
     <div className="Goals">
-      <h2>Your Calorie Goal: {account?.calorieGoal}</h2>
-      <p>
-        {" "}
-        <strong>Height:</strong> {account?.bodyType.height}
-      </p>
-      <p>
-        {" "}
-        <strong>Weight:</strong> {account?.bodyType.weight}
-      </p>
-      <p>
-        {" "}
-        <strong>Age:</strong> {account?.bodyType.age}{" "}
-      </p>
-      <p>
-        {" "}
-        <strong>Sex:</strong> {account?.bodyType.sex}
-      </p>
-      <p>
-        {" "}
-        <strong>Current Calories:</strong>{" "}
-        {account?.totalDailyCalories?.toFixed(2)}
-      </p>
+      <div className="user-details">
+        <h2>Your Calorie Goal: {account?.calorieGoal} kcal</h2>
+        <p>
+          {" "}
+          <strong>Height:</strong>{" "}
+          {isImperial
+            ? `${account?.bodyType.height! * 0.083} ft`
+            : `${account?.bodyType.weight!} cm`}
+        </p>
+        <p>
+          {" "}
+          <strong>Weight:</strong>{" "}
+          {isImperial
+            ? `${account?.bodyType.weight} lbs`
+            : `${account?.bodyType.weight} kg`}
+        </p>
+        <p>
+          {" "}
+          <strong>Age:</strong> {account?.bodyType.age} yrs
+        </p>
+        <p>
+          {" "}
+          <strong>Sex:</strong> {account?.bodyType.sex}
+        </p>
+        <p>
+          {" "}
+          <strong>Current Calories:</strong>{" "}
+          {`${account?.totalDailyCalories?.toFixed(2)} kcal`}
+        </p>
+      </div>
+
       <h3>Enter your details to track nutrition goals</h3>
 
       <form onSubmit={submitHandler}>
-        <label>
-          Metric
-          <input
-            type="radio"
-            name="measurement"
-            value="metric"
-            onClick={() => {
-              setIsImperial(false);
-            }}
-          ></input>
-        </label>
-        <label>
-          Imperial
-          <input
-            type="radio"
-            name="measurement"
-            value="imperial"
-            onClick={() => {
-              setIsImperial(true);
-            }}
-          ></input>
-        </label>
+        <div className="radio-btns">
+          <label htmlFor="metric">
+            Metric
+            <input
+              type="radio"
+              name="measurement"
+              value="metric"
+              id="metric"
+              onClick={() => {
+                setIsImperial(false);
+              }}
+            ></input>
+          </label>
+          <label htmlFor="imperial">
+            Imperial
+            <input
+              type="radio"
+              name="measurement"
+              value="imperial"
+              id="imperial"
+              onClick={() => {
+                setIsImperial(true);
+              }}
+            ></input>
+          </label>
+        </div>
 
         {isImperial ? (
           <label htmlFor="heightLarge">Height ft:</label>
         ) : (
-          <label htmlFor="heightLarge">Height in Meters </label>
+          <label htmlFor="heightLarge">Height in meters </label>
         )}
         <input
           required
@@ -208,7 +219,7 @@ const Goals = () => {
           <option value="moderate">Moderate: sports 3-5 days​ a week</option>
           <option value="active">Active: sports 6-7 days a week</option>
         </select>
-        <label htmlFor="weight-goal">Weith Goal:</label>
+        <label htmlFor="weight-goal">Weight Goal:</label>
         <select
           name=""
           id="weight-goal"
