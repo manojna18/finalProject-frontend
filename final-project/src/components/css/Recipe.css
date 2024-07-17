@@ -5,6 +5,11 @@
 #search-form {
   display: flex;
   flex-direction: column;
+  text-align: center;
+}
+
+#search-form label {
+  margin: 15px 0 15px 0;
 }
 
 #search-form input {
@@ -12,6 +17,7 @@
   padding: 1.5%;
   margin-bottom: 10px;
   border-radius: 20px;
+  margin: auto;
 }
 
 #search-form #veg {
@@ -19,6 +25,10 @@
   margin-left: 10px;
   margin-top: 5px;
   padding: 1%;
+}
+
+#search-form button {
+  margin: auto;
 }
 
 .recipes-container {

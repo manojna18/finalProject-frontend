@@ -1,6 +1,3 @@
-.NutritionTracker .warning {
-  color: red;
-}
 .NutritionTracker {
   padding: 15px;
   display: flex;
@@ -17,7 +14,7 @@
 
 .chart-holder {
   width: 300px;
-  height: 400px;
+  height: 360px;
   box-sizing: border-box;
 }
 
@@ -57,28 +54,6 @@
   font-weight: bold;
 }
 
-.NutritionTracker form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-  width: 60%;
-  height: 400px;
-  background-color: burlywood;
-  color: beige;
-  border-radius: 20px;
-}
-.NutritionTracker form label {
-  display: flex;
-  width: 40%;
-  justify-content: space-between;
-  align-items: center;
-}
-.NutritionTracker input {
-  padding: 5px;
-  border-radius: 5px;
-}
-
 .NutritionTracker button {
   margin: 10px 0;
 }
@@ -87,13 +62,18 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 10px;
 }
 
 .NutritionTracker .plate {
+  padding: 20px;
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 100%;
+  /* height: 500px; */
 }
 
 .nutrition-recipe-div {
@@ -113,9 +93,65 @@
   top: -5px;
   right: -5px;
 }
-.plate {
+
+.warnings {
+  background-color: rgb(237, 92, 92);
+  color: white;
+  font-weight: bold;
+  /* padding: 10px; */
+  line-height: 25px;
+  border-radius: 15px;
+  margin-bottom: 10px;
+  height: fit-content;
+}
+
+.warning {
+  padding: 10px;
+}
+.warnings-btns {
+  width: 80%;
+  text-align: center;
+  margin-right: 20px;
+}
+.warnings-btns button {
+  margin: 10px;
+}
+
+.custom-meal-form {
+  margin: auto;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  text-align: center;
+  width: 90%;
+  height: 400px;
+  background-color: #bb641d;
+  color: beige;
+  border-radius: 20px;
+  padding: 20px 20px 30px 20px;
+}
+
+.custom-meal-form label {
+  text-align: center;
+  margin: auto;
+  width: 300px;
+}
+
+.custom-meal-form input {
+  padding: 5px;
+  border-radius: 10px;
+  margin: 10px auto 10px auto;
   width: 100%;
-  height: 500px;
+}
+
+.custom-meal-form button {
+  margin: auto;
+}
+
+.custom-meal-form h3 {
+  color: black;
+  margin-bottom: 10px;
 }
 
 @media screen and (width > 768px) {
@@ -124,11 +160,28 @@
     justify-content: space-between;
     /* align-items: flex-start; */
     width: 80%;
+    margin-bottom: 10px;
   }
 
   .NutritionTracker .plate {
     flex-direction: row;
     flex-wrap: wrap;
     align-items: flex-start;
+    margin-top: 20px;
+  }
+
+  .custom-meal-form {
+    margin: auto;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    text-align: center;
+    width: 40%;
+    height: 400px;
+    background-color: #bb641d;
+    color: beige;
+    border-radius: 20px;
+    padding: 20px 20px 30px 20px;
   }
 }

@@ -25,7 +25,7 @@ const PieChart = ({ chartData }: Prop) => {
           plugins: {
             title: {
               display: true,
-              text: "Your nutrition today",
+              text: "Macros percentage",
             },
           },
         }}

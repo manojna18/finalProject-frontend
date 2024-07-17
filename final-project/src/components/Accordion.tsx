@@ -24,11 +24,10 @@ const AccordionItem = ({ isOpen, isToday, day, onClick }: ItemProps) => {
         className="details-container"
         style={{ display: isOpen ? "block" : "none" }}
       >
-        <p>{`Daily Calories: ${day?.totalDailyCalories}`}</p>
+        <p>{`Calories Consumed: ${day?.totalDailyCalories?.toFixed()}`}</p>
         {day.recipes.map((item) => {
           return (
             <div className="nutrition-recipe-div" key={item.id}>
-                
               <RecipeCard recipe={item} />{" "}
               <p className="quantity">{item.quantity}</p>
             </div>

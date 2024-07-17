@@ -114,107 +114,112 @@ const NutritionTracker = () => {
           </tr>
         </table>
       </div>
-      <div className="warnings">
-        {account!.totalDailyCalories > calorieGoal && (
-          <p className="warning">
-            {" "}
-            you have exceeded your calorie goal for a day
-          </p>
-        )}
-        {account!.totalDailyProtein > proteinLimitInGrams && (
-          <p className="warning">
-            you have exceeded recommended protein amount for a day
-          </p>
-        )}
-        {account!.totalDailyCarbs > carbLimitInGrams && (
-          <p className="warning">
-            you have exceeded recommended carbs amount for a day
-          </p>
-        )}
-        {account!.totalDailyFats > fatLimitInGrams && (
-          <p className="warning">
-            you have exceeded recommended fats amount for a day
-          </p>
-        )}
-      </div>
-      <button
-        onClick={() => {
-          setShowForm(!showForm);
-        }}
-      >
-        {showForm ? "Hide form" : "Add custom meal"}
-      </button>
-      <form
-        style={{ display: showForm ? "flex" : "none" }}
-        onSubmit={(e: FormEvent) => {
-          e.preventDefault();
-          addCustomMeal(
-            customName,
-            customCalories,
-            customProtein,
-            customCarbs,
-            customFat
-          );
-        }}
-      >
-        <h3>Custom meal entry</h3>
-        <label htmlFor="">
-          Name
-          <input
-            type="text"
-            className="customName"
-            onChange={(e) => {
-              setCustomName(e.target.value);
-            }}
-          />
-        </label>
-        <label htmlFor="">
-          Calories
-          <input
-            type="number"
-            className="customCalories"
-            value={customCalories}
-            onChange={(e) => {
-              setCustomCalories(e.target.value);
-            }}
-          ></input>
-        </label>
-        <label htmlFor="">
-          Protein
-          <input
-            type="number"
-            className="customProtein"
-            value={customProtein}
-            onChange={(e) => {
-              setCustomProtein(e.target.value);
-            }}
-          ></input>
-        </label>
-        <label htmlFor="">
-          Carbs
-          <input
-            type="text"
-            className="customCarbs"
-            value={customCarbs}
-            onChange={(e) => {
-              setCustomCarbs(e.target.value);
-            }}
-          ></input>
-        </label>
-        <label htmlFor="">
-          Fat
-          <input
-            type="number"
-            className="customFat"
-            value={customFat}
-            onChange={(e) => {
-              setCustomFat(e.target.value);
-            }}
-          ></input>
-        </label>
-        <button>Submit</button>
-      </form>
-      <button onClick={clearMealsHandler}>Clear All Meals</button>
+      <section className="warnings-btns">
+        <div className="warnings">
+          {account!.totalDailyCalories > calorieGoal && (
+            <p className="warning">
+              {" "}
+              You have exceeded your daily recommended calories!
+            </p>
+          )}
+          {account!.totalDailyProtein > proteinLimitInGrams && (
+            <p className="warning">
+              You have exceeded your daily recommended protein!
+            </p>
+          )}
+          {account!.totalDailyCarbs > carbLimitInGrams && (
+            <p className="warning">
+              You have exceeded your daily recommended carbs!
+            </p>
+          )}
+          {account!.totalDailyFats > fatLimitInGrams && (
+            <p className="warning">
+              You have exceeded your daily recommended fats!
+            </p>
+          )}
+        </div>
+        <button
+          onClick={() => {
+            setShowForm(!showForm);
+          }}
+        >
+          {showForm ? "Hide form" : "Add custom meal"}
+        </button>
+        <form
+          style={{ display: showForm ? "flex" : "none" }}
+          onSubmit={(e: FormEvent) => {
+            e.preventDefault();
+            addCustomMeal(
+              customName,
+              customCalories,
+              customProtein,
+              customCarbs,
+              customFat
+            );
+          }}
+          className="custom-meal-form"
+        >
+          <h3>Custom meal entry</h3>
+          <label htmlFor="customName">
+            Name
+            <input
+              type="text"
+              id="customName"
+              onChange={(e) => {
+                setCustomName(e.target.value);
+              }}
+            />
+          </label>
+          <label htmlFor="customCalories">
+            Calories
+            <input
+              type="number"
+              id="customCalories"
+              value={customCalories}
+              onChange={(e) => {
+                setCustomCalories(e.target.value);
+              }}
+            ></input>
+          </label>
+          <label htmlFor="customProtein">
+            Protein
+            <input
+              type="number"
+              id="customProtein"
+              value={customProtein}
+              onChange={(e) => {
+                setCustomProtein(e.target.value);
+              }}
+            ></input>
+          </label>
+          <label htmlFor="customCarbs">
+            Carbs
+            <input
+              type="text"
+              id="customCarbs"
+              value={customCarbs}
+              onChange={(e) => {
+                setCustomCarbs(e.target.value);
+              }}
+            ></input>
+          </label>
+          <label htmlFor="customFat">
+            Fat
+            <input
+              type="number"
+              id="customFat"
+              value={customFat}
+              onChange={(e) => {
+                setCustomFat(e.target.value);
+              }}
+            ></input>
+          </label>
+          <button>Submit</button>
+        </form>
+        <button onClick={clearMealsHandler} className="clear-meal-btn">
+          Clear All Meals
+        </button>
+      </section>
       <div className="plate">
         <Accordion />
         {/* {account?.meals.map((item) => {

@@ -1,9 +1,9 @@
 import "./css/Goals.css";
 import { FormEvent, useContext, useEffect, useState } from "react";
 import AccountContext from "../context/AccountContext";
+import goalsImg from "../assets/Family-goals.png";
 
 const Goals = () => {
-
   const [userHeightSmallerUnit, setUserHeightSmallerUnit] =
     useState<string>("");
   const [userHeightLargerUnit, setUserHeightLargerUnit] = useState<string>("");
@@ -18,10 +18,10 @@ const Goals = () => {
   const { account, setBodyType } = useContext(AccountContext);
 
   useEffect(() => {
-    if(account) {
+    if (account) {
       setIsImperial(account.bodyType.isImperial);
     }
-  }, [account])
+  }, [account]);
 
   const calculateCalorieGoal = (): number => {
     let height = 0;
@@ -30,7 +30,6 @@ const Goals = () => {
     const moderateActivityLevel = 1.55;
     const veryActiveActivityLevel = 1.725;
     if (isImperial) {
-  
       height = +userHeightLargerUnit * 12 + +userHeightSmallerUnit;
     } else {
       height = +userHeightLargerUnit * 100 + +userHeightSmallerUnit;
@@ -66,7 +65,6 @@ const Goals = () => {
     e.preventDefault();
     let height: string = "";
     if (isImperial) {
-  
       height = (+userHeightLargerUnit * 12 + +userHeightSmallerUnit).toString();
     } else {
       height = (
@@ -79,7 +77,15 @@ const Goals = () => {
     let weight: number = +userWeight;
     let age: number = +userAge;
     if (height && weight && age) {
-      await setBodyType(+userHeightLargerUnit, +userHeightSmallerUnit, weight, age, userSex, calculateCalorieGoal(), isImperial);
+      await setBodyType(
+        +userHeightLargerUnit,
+        +userHeightSmallerUnit,
+        weight,
+        age,
+        userSex,
+        calculateCalorieGoal(),
+        isImperial
+      );
       //setCalorieGoal(calculateCalorieGoal());
       //ProteinGoal = weight(in pounds) * 0.36
       //CarbGoal = .45 * calorieGoal
@@ -88,11 +94,10 @@ const Goals = () => {
     } else {
       setDisplayError(true);
     }
-  
+
     setUserWeight("");
     setUserAge("");
   };
-
 
   return (
     <div className="Goals">
@@ -102,10 +107,10 @@ const Goals = () => {
           {" "}
           <strong>Height:</strong>{" "}
           {account?.bodyType.isImperial
-            ? `${account?.bodyType.height}ft ${
+            ? `${account?.bodyType.height}ft ${account?.bodyType.heightSmallerUnit}in`
+            : `${account?.bodyType.height!}m ${
                 account?.bodyType.heightSmallerUnit
-              }in`
-            : `${account?.bodyType.height!}m ${account?.bodyType.heightSmallerUnit}cm`}
+              }cm`}
         </p>
         <p>
           {" "}
@@ -128,6 +133,7 @@ const Goals = () => {
           {`${account?.totalDailyCalories?.toFixed(2)} kcal`}
         </p>
       </div>
+      <img src={goalsImg} id="goals-img" />
 
       <h3>Enter your details to track nutrition goals</h3>
 
