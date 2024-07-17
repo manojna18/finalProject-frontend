@@ -4,6 +4,7 @@ import AccountContext from "../context/AccountContext";
 import RecipeCard from "./RecipeCard";
 import { Chart, ArcElement } from "chart.js/auto";
 import PieChart from "./PieChart";
+import Accordion from "./Accordion";
 
 Chart.register(ArcElement);
 
@@ -215,14 +216,15 @@ const NutritionTracker = () => {
       </form>
       <button onClick={clearMealsHandler}>Clear All Meals</button>
       <div className="plate">
-        {account?.meals.map((item) => {
+        <Accordion />
+        {/* {account?.meals.map((item) => {
           return (
-            <div className="nutrition-recipe-div" key={item.id}>
-              <RecipeCard recipe={item} />{" "}
-              <p className="quantity">{item.quantity}</p>
-            </div>
+            // <div className="nutrition-recipe-div" key={item.id}>
+            //   <RecipeCard recipe={item} />{" "}
+            //   <p className="quantity">{item.quantity}</p>
+            // </div>
           );
-        })}
+        })} */}
       </div>
     </div>
   );

@@ -42,5 +42,5 @@ export default interface Recipe {
     fats: string;
     fiber?: string;
   };
-  quanity?: number;
+  quantity?: number;
 }

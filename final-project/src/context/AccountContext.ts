@@ -26,10 +26,12 @@ interface AccountContextModel {
   clearAllMeals(): void;
   setBodyType(
     height: number,
+    heightSmallerNumber: number,
     weight: number,
     age: number,
     sex: string,
-    calorieGoal: number
+    calorieGoal: number,
+    isImperial: boolean
   ): void;
 }
 const defaultValues: AccountContextModel = {

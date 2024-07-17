@@ -113,6 +113,10 @@
   top: -5px;
   right: -5px;
 }
+.plate {
+  width: 100%;
+  height: 500px;
+}
 
 @media screen and (width > 768px) {
   .NutritionTracker .nutrition-charts {

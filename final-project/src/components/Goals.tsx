@@ -1,9 +1,9 @@
 import "./css/Goals.css";
-import { FormEvent, useContext, useState } from "react";
+import { FormEvent, useContext, useEffect, useState } from "react";
 import AccountContext from "../context/AccountContext";
 
 const Goals = () => {
-  const [userHeight, setUserHeight] = useState<string>("");
+
   const [userHeightSmallerUnit, setUserHeightSmallerUnit] =
     useState<string>("");
   const [userHeightLargerUnit, setUserHeightLargerUnit] = useState<string>("");
@@ -15,7 +15,13 @@ const Goals = () => {
   const [userWeightGoal, setUserWeightGoal] = useState("maintain");
   const [displayError, setDisplayError] = useState(false);
   // const { user } = useContext(UserContext);
-  const { account, setBodyType, setCalorieGoal } = useContext(AccountContext);
+  const { account, setBodyType } = useContext(AccountContext);
+
+  useEffect(() => {
+    if(account) {
+      setIsImperial(account.bodyType.isImperial);
+    }
+  }, [account])
 
   const calculateCalorieGoal = (): number => {
     let height = 0;
@@ -24,7 +30,7 @@ const Goals = () => {
     const moderateActivityLevel = 1.55;
     const veryActiveActivityLevel = 1.725;
     if (isImperial) {
-      console.log(userHeight);
+  
       height = +userHeightLargerUnit * 12 + +userHeightSmallerUnit;
     } else {
       height = +userHeightLargerUnit * 100 + +userHeightSmallerUnit;
@@ -60,7 +66,7 @@ const Goals = () => {
     e.preventDefault();
     let height: string = "";
     if (isImperial) {
-      console.log(userHeight);
+  
       height = (+userHeightLargerUnit * 12 + +userHeightSmallerUnit).toString();
     } else {
       height = (
@@ -68,13 +74,12 @@ const Goals = () => {
         +userHeightSmallerUnit
       ).toString();
     }
-    console.log(userHeight);
-    setUserHeight(height);
+
     console.log(height);
     let weight: number = +userWeight;
     let age: number = +userAge;
     if (height && weight && age) {
-      await setBodyType(+height, weight, age, userSex, calculateCalorieGoal());
+      await setBodyType(+userHeightLargerUnit, +userHeightSmallerUnit, weight, age, userSex, calculateCalorieGoal(), isImperial);
       //setCalorieGoal(calculateCalorieGoal());
       //ProteinGoal = weight(in pounds) * 0.36
       //CarbGoal = .45 * calorieGoal
@@ -83,12 +88,12 @@ const Goals = () => {
     } else {
       setDisplayError(true);
     }
-    setUserHeight("");
+  
     setUserWeight("");
     setUserAge("");
   };
 
-  console.log(userHeight);
+
   return (
     <div className="Goals">
       <div className="user-details">
@@ -96,16 +101,16 @@ const Goals = () => {
         <p>
           {" "}
           <strong>Height:</strong>{" "}
-          {isImperial
-            ? `${Math.floor(account?.bodyType.height! * 0.083)} ft ${
+          {account?.bodyType.isImperial
+            ? `${account?.bodyType.height}ft ${
                 account?.bodyType.heightSmallerUnit
-              } in`
-            : `${account?.bodyType.weight!} cm`}
+              }in`
+            : `${account?.bodyType.height!}m ${account?.bodyType.heightSmallerUnit}cm`}
         </p>
         <p>
           {" "}
           <strong>Weight:</strong>{" "}
-          {isImperial
+          {account?.bodyType.isImperial
             ? `${account?.bodyType.weight} lbs`
             : `${account?.bodyType.weight} kg`}
         </p>

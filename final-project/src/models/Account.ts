@@ -1,4 +1,5 @@
 import BodyType from "./BodyType";
+import Day from "./Day";
 import Recipe from "./Recipe";
 
 export default interface Account {
@@ -11,7 +12,7 @@ export default interface Account {
   totalDailyFats: number;
   favorites: Recipe[];
   calorieGoal: number;
-  meals: Recipe[];
+  meals: Day[];
   // addMacros(
   //   calories: number,
   //   protein: number,

@@ -11,6 +11,7 @@ import {
   editAccount,
   getAccountInfo,
 } from "../services/accountApiService";
+import Day from "../models/Day";
 // import Recipe from "../components/Recipe";
 interface Props {
   children: ReactNode;
@@ -20,9 +21,11 @@ const AccountContextProvider = ({ children }: Props) => {
   const [account, setAccountInfo] = useState<Account | null>({
     bodyType: {
       height: 0,
+      heightSmallerUnit: 0,
       weight: 0,
       age: 0,
       sex: "F",
+      isImperial: false,
     },
     totalDailyCalories: 0,
     totalDailyCarbs: 0,
@@ -75,6 +78,24 @@ const AccountContextProvider = ({ children }: Props) => {
     }
   };
 
+  const resetCalendar = async (): Promise<void> => {
+    let meals: Day[] = [];
+    let day = new Date();
+    day.setDate(day.getDate() - 7);
+    for (let i = 0; i < 7; i++) {
+      day.setDate(day.getDate() + 1);
+      meals.push({ date: day.toLocaleDateString(), recipes: [], totalDailyCalories: 0,
+        totalDailyCarbs: 0,
+        totalDailyFats: 0,
+        totalDailyProtein: 0});
+    }
+    await editAccount({
+      ...account!,
+      meals: meals,
+    });
+    await updateAccount();
+  };
+
   const addMacros = async (
     calories: number,
     protein: number,
@@ -82,22 +103,49 @@ const AccountContextProvider = ({ children }: Props) => {
     fats: number,
     recipe: Recipe
   ) => {
-    const index: number = account!.meals.findIndex((r) => {
+    if (account?.meals.length === 0) {
+      await resetCalendar();
+    }
+    // resetCalendar()
+
+    console.log(account?.meals);
+    const index: number = account!.meals[6].recipes.findIndex((r) => {
       return r.id === recipe.id;
     });
-    let meals: Recipe[] = [];
+    let meals: Day[] = [];
 
     if (account) {
       if (index === -1) {
-        meals = [...account?.meals, { ...recipe, quantity: 1 }];
+        meals = [
+          ...account.meals.slice(0, 6),
+          {
+            date: account.meals[6].date,
+            recipes: [...account?.meals[6].recipes, { ...recipe, quantity: 1 }],
+            totalDailyCalories: account.totalDailyCalories + calories,
+            totalDailyCarbs: account.totalDailyCarbs + carbs,
+            totalDailyFats: account.totalDailyFats + fats,
+            totalDailyProtein: account.totalDailyProtein + protein,
+          },
+        ];
       } else {
         meals = [
-          ...account.meals.slice(0, index),
+          ...account.meals.slice(0, 6),
           {
-            ...account.meals[index],
-            quantity: account!.meals[index].quantity! + 1,
+            date: account.meals[6].date,
+            recipes: [
+              ...account.meals[6].recipes.slice(0, index),
+              {
+                ...account.meals[6].recipes[index],
+                quantity: account!.meals[6].recipes[index].quantity! + 1,
+              },
+              ...account.meals[6].recipes.slice(index + 1),
+            ],
+            totalDailyCalories: account.totalDailyCalories + calories,
+            totalDailyCarbs: account.totalDailyCarbs + carbs,
+            totalDailyFats: account.totalDailyFats + fats,
+            totalDailyProtein: account.totalDailyProtein + protein,
           },
-          ...account.meals.slice(index + 1),
+          
         ];
       }
       await editAccount({
@@ -138,23 +186,51 @@ const AccountContextProvider = ({ children }: Props) => {
     fats: number,
     recipe: Recipe
   ): Promise<void> => {
-    const index = account!.meals.findIndex((m) => m.id === recipe.id);
-    let meals: Recipe[] = [];
+    if (account?.meals.length === 0) {
+      resetCalendar();
+    }
+    const index = account!.meals[6].recipes.findIndex(
+      (m) => m.id === recipe.id
+    );
+    if (index === -1) {
+      return;
+    }
+    let meals: Day[] = [];
 
     if (account) {
-      if (account.meals[index].quantity! > 1) {
+      if (account.meals[6].recipes[index].quantity! > 1) {
         meals = [
-          ...account.meals.slice(0, index),
+          ...account.meals.slice(0, 6),
           {
-            ...account.meals[index],
-            quantity: account!.meals[index].quantity! - 1,
+            date: account.meals[6].date,
+            recipes: [
+              ...account.meals[6].recipes.slice(0, index),
+              {
+                ...account.meals[6].recipes[index],
+                quantity: account!.meals[6].recipes[index].quantity! - 1,
+              },
+              ...account.meals[6].recipes.slice(index + 1),
+            ],
+            totalDailyCalories: account.totalDailyCalories - calories,
+            totalDailyCarbs: account.totalDailyCarbs - carbs,
+            totalDailyFats: account.totalDailyFats - fats,
+            totalDailyProtein: account.totalDailyProtein - protein,
           },
-          ...account.meals.slice(index + 1),
         ];
       } else {
         meals = [
-          ...account.meals.slice(0, index),
-          ...account.meals.slice(index + 1),
+          ...account.meals.slice(0, 6),
+          {
+            date: account.meals[6].date,
+            recipes: [
+              ...account.meals[6].recipes.slice(0, index),
+              ...account.meals[6].recipes.slice(index + 1),
+            ],
+            totalDailyCalories: account.totalDailyCalories - calories,
+            totalDailyCarbs: account.totalDailyCarbs - carbs,
+            totalDailyFats: account.totalDailyFats - fats,
+            totalDailyProtein: account.totalDailyProtein - protein,
+          },
         ];
       }
       await editAccount({
@@ -205,7 +281,13 @@ const AccountContextProvider = ({ children }: Props) => {
         totalDailyCarbs: 0,
         totalDailyFats: 0,
         totalDailyProtein: 0,
-        meals: [],
+        meals: [
+          ...account.meals.slice(0, 6),
+          { date: account.meals[6].date, recipes: [], totalDailyCalories: 0,
+            totalDailyCarbs: 0,
+            totalDailyFats: 0,
+            totalDailyProtein: 0 },
+        ],
       });
       updateAccount();
     } else {
@@ -215,19 +297,23 @@ const AccountContextProvider = ({ children }: Props) => {
 
   const setBodyType = async (
     height: number,
+    heightSmallerUnit: number,
     weight: number,
     age: number,
     sex: string,
-    calorieGoal: number
+    calorieGoal: number,
+    isImperial: boolean
   ): Promise<void> => {
     if (account) {
       await editAccount({
         ...account,
         bodyType: {
           height,
+          heightSmallerUnit,
           weight,
           age,
           sex,
+          isImperial,
         },
         calorieGoal: calorieGoal,
       });

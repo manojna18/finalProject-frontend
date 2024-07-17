@@ -4,4 +4,5 @@ export default interface BodyType {
   weight: number;
   age: number;
   sex: string;
+  isImperial: boolean;
 }
