@@ -96,6 +96,24 @@
   justify-content: center;
 }
 
+.nutrition-recipe-div {
+  position: relative;
+}
+
+.NutritionTracker .quantity {
+  background-color: black;
+  color: white;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  font-size: 20px;
+  line-height: 40px;
+  border-radius: 50%;
+  position: absolute;
+  top: -5px;
+  right: -5px;
+}
+
 @media screen and (width > 768px) {
   .NutritionTracker .nutrition-charts {
     flex-direction: row;

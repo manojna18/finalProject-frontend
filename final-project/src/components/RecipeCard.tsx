@@ -59,12 +59,12 @@ const RecipeCard = ({ recipe }: Prop) => {
   return (
     <div
       className="RecipeCard"
-      style={{ height: detailBool ? "1400px" : "400px" }}
+      style={{ height: detailBool ? "auto" : "400px" }}
     >
       <div
         className="recipe"
         key={recipe.id}
-        style={{ height: detailBool ? "1500px" : "450px" }}
+        style={{ height: detailBool ? "auto" : "450px" }}
       >
         <h3>{recipe.title}</h3>
         <img src={recipe.image} />

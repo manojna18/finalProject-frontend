@@ -32,7 +32,6 @@
   display: flex;
   flex-direction: column;
   padding: 15px;
-  height: auto;
   width: 100%;
   text-align: center;
   background-color: #60be97;
@@ -48,6 +47,7 @@
   padding: 10px;
   border-radius: 15px;
   border: 1px solid honeydew;
+  margin-bottom: 10px;
 }
 
 .readMoreButton {
@@ -56,7 +56,8 @@
 
 .recipe img {
   margin: 10px auto;
-  width: 300px;
+  width: 250px;
+  border-radius: 5px;
 }
 
 .recipe label {
@@ -83,21 +84,26 @@
     margin: auto;
   }
 
+  .recipes-container {
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
   .recipe {
     text-align: center;
     margin: auto;
     height: auto;
-    width: 50%;
+    width: 350px;
     justify-content: space-evenly;
   }
 
   .recipe img {
     height: auto;
-    width: 400px;
   }
 
-  .readMoreButton {
-    margin: 10px auto 30px auto;
-    width: 30%;
+  .recipe h3 {
+    font-size: 16px;
+    width: 300px;
   }
 }

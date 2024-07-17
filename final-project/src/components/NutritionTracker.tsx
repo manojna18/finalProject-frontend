@@ -216,7 +216,12 @@ const NutritionTracker = () => {
       <button onClick={clearMealsHandler}>Clear All Meals</button>
       <div className="plate">
         {account?.meals.map((item) => {
-          return <RecipeCard key={item.id} recipe={item} />;
+          return (
+            <div className="nutrition-recipe-div" key={item.id}>
+              <RecipeCard recipe={item} />{" "}
+              <p className="quantity">{item.quantity}</p>
+            </div>
+          );
         })}
       </div>
     </div>

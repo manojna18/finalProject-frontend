@@ -82,14 +82,31 @@ const AccountContextProvider = ({ children }: Props) => {
     fats: number,
     recipe: Recipe
   ) => {
+    const index: number = account!.meals.findIndex((r) => {
+      return r.id === recipe.id;
+    });
+    let meals: Recipe[] = [];
+
     if (account) {
+      if (index === -1) {
+        meals = [...account?.meals, { ...recipe, quantity: 1 }];
+      } else {
+        meals = [
+          ...account.meals.slice(0, index),
+          {
+            ...account.meals[index],
+            quantity: account!.meals[index].quantity! + 1,
+          },
+          ...account.meals.slice(index + 1),
+        ];
+      }
       await editAccount({
         ...account!,
         totalDailyCalories: account.totalDailyCalories + calories,
         totalDailyCarbs: account.totalDailyCarbs + carbs,
         totalDailyFats: account.totalDailyFats + fats,
         totalDailyProtein: account.totalDailyProtein + protein,
-        meals: [...account.meals, recipe],
+        meals: meals,
       });
       updateAccount();
     } else {
@@ -122,17 +139,31 @@ const AccountContextProvider = ({ children }: Props) => {
     recipe: Recipe
   ): Promise<void> => {
     const index = account!.meals.findIndex((m) => m.id === recipe.id);
+    let meals: Recipe[] = [];
+
     if (account) {
+      if (account.meals[index].quantity! > 1) {
+        meals = [
+          ...account.meals.slice(0, index),
+          {
+            ...account.meals[index],
+            quantity: account!.meals[index].quantity! - 1,
+          },
+          ...account.meals.slice(index + 1),
+        ];
+      } else {
+        meals = [
+          ...account.meals.slice(0, index),
+          ...account.meals.slice(index + 1),
+        ];
+      }
       await editAccount({
         ...account!,
         totalDailyCalories: account.totalDailyCalories - calories,
         totalDailyCarbs: account.totalDailyCarbs - carbs,
         totalDailyFats: account.totalDailyFats - fats,
         totalDailyProtein: account.totalDailyProtein - protein,
-        meals: [
-          ...account.meals.slice(0, index),
-          ...account.meals.slice(index + 1),
-        ],
+        meals: meals,
       });
       updateAccount();
     } else {
