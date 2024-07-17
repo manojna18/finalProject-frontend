@@ -97,7 +97,9 @@ const Goals = () => {
           {" "}
           <strong>Height:</strong>{" "}
           {isImperial
-            ? `${account?.bodyType.height! * 0.083} ft`
+            ? `${Math.floor(account?.bodyType.height! * 0.083)} ft ${
+                account?.bodyType.heightSmallerUnit
+              } in`
             : `${account?.bodyType.weight!} cm`}
         </p>
         <p>
