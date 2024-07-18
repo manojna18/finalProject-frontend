@@ -1,7 +1,6 @@
 import { FormEvent, useContext, useState } from "react";
 import "./css/NutritionTracker.css";
 import AccountContext from "../context/AccountContext";
-import RecipeCard from "./RecipeCard";
 import { Chart, ArcElement } from "chart.js/auto";
 import PieChart from "./PieChart";
 import Accordion from "./Accordion";

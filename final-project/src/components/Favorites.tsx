@@ -2,7 +2,6 @@ import { useContext } from "react";
 import "./css/Favorites.css";
 import AccountContext from "../context/AccountContext";
 import RecipeCard from "./RecipeCard";
-import { addAccount } from "../services/accountApiService";
 import { useNavigate } from "react-router-dom";
 import userContext from "../context/UserContext";
 
@@ -10,7 +9,7 @@ const Favorites = () => {
   const { account } = useContext(AccountContext);
   const { user } = useContext(userContext);
   const navigate = useNavigate();
-  if(!user) {
+  if (!user) {
     navigate("/");
   }
 

@@ -1,0 +1,15 @@
+.Favorites {
+  display: flex;
+  direction: row;
+  justify-content: center;
+  width: 90vw;
+  flex-wrap: wrap;
+}
+
+@media screen and (width < 800px) {
+  .Favorites {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}

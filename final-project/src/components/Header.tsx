@@ -8,7 +8,7 @@ import icon from "../assets/vegan food.png";
 
 const Header = () => {
   const { user } = useContext(userContext);
-  const { account, updateAccount } = useContext(AccountContext);
+  const { updateAccount } = useContext(AccountContext);
   const [hidden, setHidden] = useState(false);
   const navigate = useNavigate();
 

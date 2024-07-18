@@ -38,6 +38,7 @@
 .NutritionTracker .nutrition-table td {
   /* border: 1px solid brown; */
   padding: 20px 10px;
+  font-size: 11px;
 }
 .NutritionTracker .nutrition-table td:hover {
   background-color: burlywood;
@@ -165,6 +166,12 @@
     /* align-items: flex-start; */
     width: 80%;
     margin-bottom: 10px;
+  }
+
+  .NutritionTracker .nutrition-table td {
+    /* border: 1px solid brown; */
+    padding: 20px 10px;
+    font-size: medium;
   }
 
   .NutritionTracker .plate {

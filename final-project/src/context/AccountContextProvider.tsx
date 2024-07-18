@@ -1,7 +1,5 @@
 import { ReactNode, useContext, useState } from "react";
 
-import account from "../models/Account";
-import accountContext from "./AccountContext";
 import Recipe from "../models/Recipe";
 import userContext from "./UserContext";
 import Account from "../models/Account";
@@ -84,10 +82,14 @@ const AccountContextProvider = ({ children }: Props) => {
     day.setDate(day.getDate() - 7);
     for (let i = 0; i < 7; i++) {
       day.setDate(day.getDate() + 1);
-      meals.push({ date: day.toLocaleDateString(), recipes: [], totalDailyCalories: 0,
+      meals.push({
+        date: day.toLocaleDateString(),
+        recipes: [],
+        totalDailyCalories: 0,
         totalDailyCarbs: 0,
         totalDailyFats: 0,
-        totalDailyProtein: 0});
+        totalDailyProtein: 0,
+      });
     }
     await editAccount({
       ...account!,
@@ -145,7 +147,6 @@ const AccountContextProvider = ({ children }: Props) => {
             totalDailyFats: account.totalDailyFats + fats,
             totalDailyProtein: account.totalDailyProtein + protein,
           },
-          
         ];
       }
       await editAccount({
@@ -283,10 +284,14 @@ const AccountContextProvider = ({ children }: Props) => {
         totalDailyProtein: 0,
         meals: [
           ...account.meals.slice(0, 6),
-          { date: account.meals[6].date, recipes: [], totalDailyCalories: 0,
+          {
+            date: account.meals[6].date,
+            recipes: [],
+            totalDailyCalories: 0,
             totalDailyCarbs: 0,
             totalDailyFats: 0,
-            totalDailyProtein: 0 },
+            totalDailyProtein: 0,
+          },
         ],
       });
       updateAccount();

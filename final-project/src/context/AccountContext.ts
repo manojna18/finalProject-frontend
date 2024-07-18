@@ -1,5 +1,4 @@
 import { createContext } from "react";
-import User from "../models/Account";
 import Recipe from "../models/Recipe";
 import Account from "../models/Account";
 interface AccountContextModel {

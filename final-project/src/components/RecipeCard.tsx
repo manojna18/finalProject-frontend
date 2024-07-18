@@ -2,12 +2,9 @@ import { useContext, useEffect, useState } from "react";
 import Recipe from "../models/Recipe";
 import "./css/RecipeCard.css";
 import RecipeDetail from "./RecipeDetail";
-import { getByID } from "../services/spoonacularApiService";
 import RecipeInterface from "../models/Recipe";
 import AccountContext from "../context/AccountContext";
-import { addAccount } from "../services/accountApiService";
 import userContext from "../context/UserContext";
-import { useNavigate } from "react-router-dom";
 import CustomRecipe from "./CustomRecipe";
 import heart_regular from "../assets/heart-regular.svg";
 import heart_solid from "../assets/heart-solid.svg";
@@ -24,7 +21,8 @@ const RecipeCard = ({ recipe }: Prop) => {
   );
   const { user } = useContext(userContext);
   const [hidden, setHidden] = useState(false);
-  const navigate = useNavigate();
+
+  console.log(hidden);
 
   const showItemDetails = (recipe: RecipeInterface) => {
     console.dir(recipe);

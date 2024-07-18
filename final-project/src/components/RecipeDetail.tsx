@@ -6,7 +6,6 @@ import NutrientInfo from "../models/NutrientInfo";
 import AccountContext from "../context/AccountContext";
 import Recipe from "../models/Recipe";
 import userContext from "../context/UserContext";
-import { useNavigate } from "react-router-dom";
 
 interface Props {
   id: number;
@@ -16,11 +15,9 @@ interface Props {
 const RecipeDetail = ({ id, recipe }: Props) => {
   const [details, setDetails] = useState<RecipeByID>();
   const [nutriInfo, setNutriInfo] = useState<NutrientInfo>();
-  const { account, addMacros, removeMeal } = useContext(AccountContext);
-  const [meals, setMeals] = useState<Recipe[]>([]);
+  const { addMacros, removeMeal } = useContext(AccountContext);
   const { user } = useContext(userContext);
   const [disabled, setDisabled] = useState(false);
-  const navigate = useNavigate();
 
   useEffect(() => {
     let ignore = false;
