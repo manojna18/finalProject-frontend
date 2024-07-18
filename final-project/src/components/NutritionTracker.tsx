@@ -160,60 +160,50 @@ const NutritionTracker = () => {
           className="custom-meal-form"
         >
           <h3>Custom meal entry</h3>
-          <label htmlFor="customName">
-            Name
-            <input
-              type="text"
-              id="customName"
-              onChange={(e) => {
-                setCustomName(e.target.value);
-              }}
-            />
-          </label>
-          <label htmlFor="customCalories">
-            Calories
-            <input
-              type="number"
-              id="customCalories"
-              value={customCalories}
-              onChange={(e) => {
-                setCustomCalories(e.target.value);
-              }}
-            ></input>
-          </label>
-          <label htmlFor="customProtein">
-            Protein
-            <input
-              type="number"
-              id="customProtein"
-              value={customProtein}
-              onChange={(e) => {
-                setCustomProtein(e.target.value);
-              }}
-            ></input>
-          </label>
-          <label htmlFor="customCarbs">
-            Carbs
-            <input
-              type="text"
-              id="customCarbs"
-              value={customCarbs}
-              onChange={(e) => {
-                setCustomCarbs(e.target.value);
-              }}
-            ></input>
-          </label>
-          <label htmlFor="customFat">
-            Fat
-            <input
-              type="number"
-              id="customFat"
-              value={customFat}
-              onChange={(e) => {
-                setCustomFat(e.target.value);
-              }}
-            ></input>
-          </label>
+          <label htmlFor="customName">Name</label>
+          <input
+            type="text"
+            id="customName"
+            onChange={(e) => {
+              setCustomName(e.target.value);
+            }}
+          />
+          <label htmlFor="customCalories">Calories</label>
+          <input
+            type="number"
+            id="customCalories"
+            value={customCalories}
+            onChange={(e) => {
+              setCustomCalories(e.target.value);
+            }}
+          ></input>
+          <label htmlFor="customProtein">Protein</label>
+          <input
+            type="number"
+            id="customProtein"
+            value={customProtein}
+            onChange={(e) => {
+              setCustomProtein(e.target.value);
+            }}
+          ></input>
+          <label htmlFor="customCarbs">Carbs</label>
+          <input
+            type="text"
+            id="customCarbs"
+            value={customCarbs}
+            onChange={(e) => {
+              setCustomCarbs(e.target.value);
+            }}
+          ></input>
+          <label htmlFor="customFat">Fat</label>
+          <input
+            type="number"
+            id="customFat"
+            value={customFat}
+            onChange={(e) => {
+              setCustomFat(e.target.value);
+            }}
+          ></input>
           <button>Submit</button>
         </form>
         <button onClick={clearMealsHandler} className="clear-meal-btn">

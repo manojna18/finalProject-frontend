@@ -18,13 +18,14 @@
   box-sizing: border-box;
 }
 
-.NutritionTracker .nutrition-table {
+.nutrition-table {
   margin: 20px 0;
   background-color: beige;
   border: 1px solid burlywood;
   border-collapse: collapse;
   text-align: center;
   font-size: 15px;
+  width: 50%;
 }
 
 .NutritionTracker .nutrition-table tr {
@@ -122,6 +123,7 @@
   margin: auto;
   margin-bottom: 10px;
   display: flex;
+  align-items: center;
   flex-direction: column;
   justify-content: space-around;
   text-align: center;
@@ -136,14 +138,15 @@
 .custom-meal-form label {
   text-align: center;
   margin: auto;
-  width: 300px;
+  align-items: center;
 }
 
 .custom-meal-form input {
   padding: 5px;
   border-radius: 10px;
-  margin: 10px auto 10px auto;
+  margin: 10px 10px 10px 10px;
   width: 100%;
+  display: block;
 }
 
 .custom-meal-form button {
